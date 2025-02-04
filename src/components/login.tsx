@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"; // Adjust the import paths as needed
 import { Label } from "@/components/ui/Label";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
-
 interface LoginCardProps {
-  handleLogin: () => void;
+  handleLogin: (email: string, password: string) => void;
 }
 
 export const LoginCard: React.FC<LoginCardProps> = ({ handleLogin }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleLogin(email, password);
+  };
+
   return (
     <div className="flex justify-center items-center h-full">
       <Card>
@@ -17,16 +24,26 @@ export const LoginCard: React.FC<LoginCardProps> = ({ handleLogin }) => {
           <CardTitle>Login</CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
-            <div className="space-y-2">
+          <form className="space-y-4" onSubmit={onSubmit}>
+            {/* <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="email@example.com" />
-            </div>
+              <Input
+                id="email"
+                type="email"
+                placeholder="email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div> */}
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="password" />
+              <Label htmlFor="password">Activation code</Label>
+              <Input
+                id="password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-            <Button type="button" onClick={handleLogin}>
+            <Button type="submit">
               Login
             </Button>
           </form>

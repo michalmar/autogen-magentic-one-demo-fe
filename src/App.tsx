@@ -29,6 +29,7 @@ import { LoginCard } from "./components/login";
 
 import axios from 'axios';
 
+
 interface ChatMessage {
   user: string;
   message: string;
@@ -167,7 +168,7 @@ export default function App() {
   const [userMessage, setUserMessage] = useState('')
   const [sessionTime, setSessionTime] = useState('')
   // const [files, setFiles] = useState<{ name: string, size: number, date: string }[]>([])
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(import.meta.env.VITE_ALLWAYS_LOGGED_IN)
   // const [fileUpload, setFileUpload] = useState<File | null>(null)
   // const [isFileCardVisible, setIsFileCardVisible] = useState(false)
   // const [isSettingsCardVisible, setIsSettingsCardVisible] = useState(false)
@@ -347,10 +348,10 @@ export default function App() {
     // Start timer
     const startTime = Date.now();
     try {
-      const response = await axios.post('http://localhost:8000/start', { content: userMessage, agents: JSON.stringify(agents) });
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/start`, { content: userMessage, agents: JSON.stringify(agents) });
       const sessionId = response.data.response;  // Get the session ID from the response
       setSessionID(sessionId);
-      const eventSource = new EventSource(`http://localhost:8000/chat-stream?session_id=${encodeURIComponent(sessionId)}`);
+      const eventSource = new EventSource(`${import.meta.env.VITE_BASE_URL}/chat-stream?session_id=${encodeURIComponent(sessionId)}`);
       eventSource.onmessage = (event) => {
         console.log('EventSource message:', event.data);
         const data = JSON.parse(event.data);
@@ -389,9 +390,14 @@ export default function App() {
     }
     setUserMessage('');
   };
-
-  const handleLogin = () => {
-    setIsAuthenticated(true)
+  
+  /// TODO: better login -> MS EntraID
+  const handleLogin = (email: string, password: string) => {
+    if (password === import.meta.env.VITE_ACTIVATON_CODE || import.meta.env.VITE_ALLWAYS_LOGGED_IN) {
+      setIsAuthenticated(true)
+    } else {
+      console.log('Invalid activation code')
+    }
   }
 
   const handleLogout = () => {
@@ -451,9 +457,7 @@ export default function App() {
               <Button variant="outline" onClick={handleLogout}>
                 <LogOut />Log out
               </Button>
-            ) : (
-              <Button  onClick={handleLogin}>Login</Button>
-            )}
+            ) : null}
                 
             </div>
           </div>
