@@ -34,6 +34,8 @@ import lBrain from '@/assets/l-brain.png';
 import lPen from '@/assets/l-pen.png';
 import lSearch from '@/assets/l-search.png';
 import lAi from '@/assets/l-ai.png';
+import ag from '@/assets/ag.png';
+import aAif from '@/assets/azure-aif.png';
 
 
 // TODO: FUJ! How to get ENV vars from SWA?
@@ -572,9 +574,9 @@ export default function App() {
       <footer className="bg-muted mt-8">
         <div className="container mx-auto px-4 py-2 text-center text-sm text-muted-foreground">
           <p className='inline'>&copy; 2025 MagenticOne showcase powered by </p>
-          <img src={"/src/assets/ag.png"} alt="Logo" className='w-[18px] inline'/>
+          <img src={ag} alt="Logo" className='w-[18px] inline'/>
           <p className='inline'>&nbsp;running on </p>
-          <img src={"/src/assets/azure-aif.svg"} alt="Logo" className='w-[18px] inline'/>
+          <img src={aAif} alt="Logo" className='w-[18px] inline'/>
         </div>
       </footer>
       </SidebarInset>

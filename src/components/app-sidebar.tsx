@@ -24,13 +24,14 @@ import {
   // SidebarRail,
   SidebarTrigger
 } from "@/components/ui/sidebar"
+import ag from '@/assets/ag.png';
 
 // This is sample data.
 const data = {
   user: {
     name: "demo",
     email: "m@example.com",
-    avatar: "/src/assets/ag.png",
+    avatar: ag,
   },
   teams: [
     {
