@@ -1,4 +1,5 @@
 # autogen-magentic-one-demo-fe
+[![Azure Static Web Apps CI/CD](https://github.com/michalmar/autogen-magentic-one-demo-fe/actions/workflows/azure-static-web-apps-black-plant-083682f0f.yml/badge.svg)](https://github.com/michalmar/autogen-magentic-one-demo-fe/actions/workflows/azure-static-web-apps-black-plant-083682f0f.yml)
 
 This is a AutoGen with MagenticOne demo front-end project built with React, Vite, and Tailwind CSS. 
 
@@ -66,3 +67,12 @@ For more detailed information, refer to inline comments within the source files.
 
 License
 This project is licensed under the MIT License.
+
+
+## Deployment
+
+> Note: details coming soon...
+
+Automaticly deployed using GitHub Actions.
+
+
