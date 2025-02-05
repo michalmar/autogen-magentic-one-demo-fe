@@ -168,7 +168,8 @@ export default function App() {
   const [userMessage, setUserMessage] = useState('')
   const [sessionTime, setSessionTime] = useState('')
   // const [files, setFiles] = useState<{ name: string, size: number, date: string }[]>([])
-  const [isAuthenticated, setIsAuthenticated] = useState(import.meta.env.VITE_ALLWAYS_LOGGED_IN)
+  // const [isAuthenticated, setIsAuthenticated] = useState(import.meta.env.VITE_ALLWAYS_LOGGED_IN)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
   // const [fileUpload, setFileUpload] = useState<File | null>(null)
   // const [isFileCardVisible, setIsFileCardVisible] = useState(false)
   // const [isSettingsCardVisible, setIsSettingsCardVisible] = useState(false)
@@ -393,6 +394,7 @@ export default function App() {
   
   /// TODO: better login -> MS EntraID
   const handleLogin = (email: string, password: string) => {
+    console.log('Logging in with:', email)
     if (password === import.meta.env.VITE_ACTIVATON_CODE || import.meta.env.VITE_ALLWAYS_LOGGED_IN) {
       setIsAuthenticated(true)
     } else {

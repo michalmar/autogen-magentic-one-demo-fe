@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"; // Adjust the import paths as needed
-import { Label } from "@/components/ui/Label";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"; // Adjust the import paths as needed
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface LoginCardProps {
   handleLogin: (email: string, password: string) => void;
 }
 
 export const LoginCard: React.FC<LoginCardProps> = ({ handleLogin }) => {
-  const [email, setEmail] = useState("");
+  const [email] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = (e: React.FormEvent) => {

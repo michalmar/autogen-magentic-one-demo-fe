@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { Button } from "/src/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Copy, Check } from "lucide-react"
 
 interface CodeBlockProps {

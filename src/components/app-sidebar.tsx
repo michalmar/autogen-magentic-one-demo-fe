@@ -3,9 +3,9 @@ import {
   AudioWaveform,
   BookOpen,
   Bot,
-  Command,
+  // Command,
   Frame,
-  GalleryVerticalEnd,
+  // GalleryVerticalEnd,
   Map,
   PieChart,
   Settings2,
@@ -13,7 +13,7 @@ import {
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
+// import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -21,7 +21,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
+  // SidebarRail,
   SidebarTrigger
 } from "@/components/ui/sidebar"
 
