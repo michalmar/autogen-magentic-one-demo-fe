@@ -29,6 +29,12 @@ import { LoginCard } from "./components/login";
 
 import axios from 'axios';
 
+import h1 from '@/assets/h1.png';
+import lBrain from '@/assets/l-brain.png';
+import lPen from '@/assets/l-pen.png';
+import lSearch from '@/assets/l-search.png';
+import lAi from '@/assets/l-ai.png';
+
 
 // TODO: FUJ! How to get ENV vars from SWA?
 // Define environment variables with default values
@@ -269,26 +275,26 @@ export default function App() {
   const removeAgent = (inputKey: string) => {
     setAgents(agents.filter((agent) => agent.input_key !== inputKey));
   };
-
+  
   // Helper functions to get avatar source and fallback
   const getAvatarSrc = (user: string) => {
     switch (user.toLowerCase()) {
       case 'user':
-        return '/src/assets/h1.png';
+        return h1;
       case 'magenticoneorchestrator':
-        return '/src/assets/l-brain.png';
+        return lBrain;
       case 'coder':
-        return '/src/assets/l-pen.png';
+        return lPen;
       case 'filesurfer':
-        return '/src/assets/l-search.png';
+        return lSearch;
       case 'websurfer':
-        return '/src/assets/l-search.png';
+        return lSearch;
       case 'ragagent':
-        return '/src/assets/l-search.png';
+        return lSearch;
       case 'executor':
-        return '/src/assets/l-pen.png';
+        return lPen;
       case 'taskresult':
-          return '/src/assets/l-ai.png';
+        return lAi;
       default:
         return 'https://example.com/default.png';
     }
