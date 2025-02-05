@@ -30,6 +30,18 @@ import { LoginCard } from "./components/login";
 import axios from 'axios';
 
 
+// TODO: FUJ! How to get ENV vars from SWA?
+// Define environment variables with default values
+const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
+const ALLWAYS_LOGGED_IN =
+  import.meta.env.VITE_ALLWAYS_LOGGED_IN === "true" ? true : false;
+const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
+
+console.log('VITE_BASE_URL:', BASE_URL);
+console.log('VITE_ALLWAYS_LOGGED_IN:', ALLWAYS_LOGGED_IN);
+console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
+
+
 interface ChatMessage {
   user: string;
   message: string;
@@ -52,6 +64,7 @@ interface Agent {
   icon: string;
   index_name: string;
 }
+
 
 export default function App() {
 //   const sampleMarkdown = `
@@ -168,8 +181,7 @@ export default function App() {
   const [userMessage, setUserMessage] = useState('')
   const [sessionTime, setSessionTime] = useState('')
   // const [files, setFiles] = useState<{ name: string, size: number, date: string }[]>([])
-  // const [isAuthenticated, setIsAuthenticated] = useState(import.meta.env.VITE_ALLWAYS_LOGGED_IN)
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(BASE_URL)
   // const [fileUpload, setFileUpload] = useState<File | null>(null)
   // const [isFileCardVisible, setIsFileCardVisible] = useState(false)
   // const [isSettingsCardVisible, setIsSettingsCardVisible] = useState(false)
@@ -215,7 +227,7 @@ export default function App() {
 
   const stopSession = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/stop?session_id=${encodeURIComponent(sessionID)}`);
+      const response = await axios.get(`${BASE_URL}/stop?session_id=${encodeURIComponent(sessionID)}`);
       console.log('Stop session response:', response.data);
       setIsTyping(false);
       setSessionID('');
@@ -348,12 +360,12 @@ export default function App() {
     setChatHistory([...chatHistory, newMessage]);
     // Start timer
     const startTime = Date.now();
-    console.log('VITE_BASE_URL:', import.meta.env.VITE_BASE_URL);
+    console.log('VITE_BASE_URL:', BASE_URL);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/start`, { content: userMessage, agents: JSON.stringify(agents) });
+      const response = await axios.post(`${BASE_URL}/start`, { content: userMessage, agents: JSON.stringify(agents) });
       const sessionId = response.data.response;  // Get the session ID from the response
       setSessionID(sessionId);
-      const eventSource = new EventSource(`${import.meta.env.VITE_BASE_URL}/chat-stream?session_id=${encodeURIComponent(sessionId)}`);
+      const eventSource = new EventSource(`${BASE_URL}/chat-stream?session_id=${encodeURIComponent(sessionId)}`);
       eventSource.onmessage = (event) => {
         console.log('EventSource message:', event.data);
         const data = JSON.parse(event.data);
@@ -396,7 +408,7 @@ export default function App() {
   /// TODO: better login -> MS EntraID
   const handleLogin = (email: string, password: string) => {
     console.log('Logging in with:', email)
-    if (password === import.meta.env.VITE_ACTIVATON_CODE || import.meta.env.VITE_ALLWAYS_LOGGED_IN) {
+    if (password === ACTIVATION_CODE || ALLWAYS_LOGGED_IN) {
       setIsAuthenticated(true)
     } else {
       console.log('Invalid activation code')
