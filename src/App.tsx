@@ -348,6 +348,7 @@ export default function App() {
     setChatHistory([...chatHistory, newMessage]);
     // Start timer
     const startTime = Date.now();
+    console.log('VITE_BASE_URL:', import.meta.env.VITE_BASE_URL);
     try {
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/start`, { content: userMessage, agents: JSON.stringify(agents) });
       const sessionId = response.data.response;  // Get the session ID from the response
