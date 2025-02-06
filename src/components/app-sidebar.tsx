@@ -43,41 +43,31 @@ const data = {
   navMain: [
     {
       title: "Playground",
-      url: "#",
+      url: "/", // updated to route to Playground
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
+          title: "Chat",
+          url: "/", // primary playground page
+        },
+        {
           title: "History",
-          url: "#",
+          url: "/playground-history", // updated route for Playground history
         },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
+        // Optionally remove or update additional sub-items if not used
       ],
     },
     {
       title: "Agents",
-      url: "#",
+      url: "/agents", // updated to route directly to Agents page
       icon: Bot,
       items: [
         {
           title: "AutoGen",
-          url: "#",
+          url: "/agents", // route to Agents page
         },
-        {
-          title: "MagenticOne",
-          url: "#",
-        },
-        {
-          title: "Custom",
-          url: "#",
-        },
+        // ...existing code if additional links are required...
       ],
     },
     {

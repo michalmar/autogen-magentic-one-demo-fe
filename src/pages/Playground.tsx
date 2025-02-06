@@ -22,10 +22,10 @@ import { Button } from "@/components/ui/button"
 // import remarkBreaks from 'remark-breaks'
 import { Textarea } from "@/components/ui/textarea"
 
-import { AgentsSetup } from './components/agents-setup';
-import { MarkdownRenderer } from './components/markdown-display';
-import { ModeToggle } from './components/mode-toggle'
-import { LoginCard } from "./components/login";
+import { AgentsSetup } from '@/components/agents-setup';
+import { MarkdownRenderer } from '@/components/markdown-display';
+import { ModeToggle } from '@/components/mode-toggle'
+import { LoginCard } from "@/components/login";
 
 import axios from 'axios';
 
@@ -40,7 +40,8 @@ import aAif from '@/assets/azure-aif.png';
 
 // TODO: FUJ! How to get ENV vars from SWA?
 // Define environment variables with default values
-const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be2.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
+// const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be2.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
+const BASE_URL = "http://localhost:8000";
 const ALLWAYS_LOGGED_IN =
   import.meta.env.VITE_ALLWAYS_LOGGED_IN === "true" ? true : false;
 const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
@@ -432,7 +433,7 @@ export default function App() {
     {!isAuthenticated ? (
       <LoginCard handleLogin={handleLogin} />
     ) : (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={true}>
       <AppSidebar />
       <SidebarInset>
         <header className="flex sticky top-0 bg-background h-12 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
