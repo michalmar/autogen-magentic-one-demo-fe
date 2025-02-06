@@ -62,6 +62,7 @@ const data = {
       title: "Agent Teams",
       url: "/agents", // updated to route directly to Agents page
       icon: Bot,
+      isActive: true,
       items: [
         {
           title: "AutoGen",
