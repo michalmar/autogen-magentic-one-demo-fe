@@ -15,10 +15,10 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bot, Plus, Loader2, LogOut, Download, Delete, Pencil } from "lucide-react"
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Bot, LogOut, Download, Delete, Pencil } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
+// import { Textarea } from "@/components/ui/textarea"
 
 // New imports for the history table.
 import {
@@ -31,16 +31,15 @@ import {
 } from "@/components/ui/table"
 import { format } from 'date-fns'
 
-import { AgentsSetup } from '@/components/agents-setup';
-import { MarkdownRenderer } from '@/components/markdown-display';
+// import { MarkdownRenderer } from '@/components/markdown-display';
 import { ModeToggle } from '@/components/mode-toggle'
 import { LoginCard } from "@/components/login";
 
-import h1 from '@/assets/h1.png';
-import lBrain from '@/assets/l-brain.png';
-import lPen from '@/assets/l-pen.png';
-import lSearch from '@/assets/l-search.png';
-import lAi from '@/assets/l-ai.png';
+// import h1 from '@/assets/h1.png';
+// import lBrain from '@/assets/l-brain.png';
+// import lPen from '@/assets/l-pen.png';
+// import lSearch from '@/assets/l-search.png';
+// import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
 
@@ -50,83 +49,83 @@ const ALLWAYS_LOGGED_IN =
   import.meta.env.VITE_ALLWAYS_LOGGED_IN === "true" ? true : false;
 const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 
-interface ChatMessage {
-  user: string;
-  message: string;
-  time?: string;
-  type?: string;
-  source?: string;
-  content?: string;
-  stop_reason?: string;
-  models_usage?: string;
-  content_image?: string;
-  session_id?: string;
-}
+// interface ChatMessage {
+//   user: string;
+//   message: string;
+//   time?: string;
+//   type?: string;
+//   source?: string;
+//   content?: string;
+//   stop_reason?: string;
+//   models_usage?: string;
+//   content_image?: string;
+//   session_id?: string;
+// }
 
-interface Agent {
-  input_key: string;
-  type: string;
-  name: string;
-  system_message: string;
-  description: string;
-  icon: string;
-  index_name: string;
-}
+// interface Agent {
+//   input_key: string;
+//   type: string;
+//   name: string;
+//   system_message: string;
+//   description: string;
+//   icon: string;
+//   index_name: string;
+// }
 
 export default function PlaygroundHistory() {
-  const [sessionID, setSessionID] = useState('')
+//   const [sessionID, setSessionID] = useState('')
   const [isAuthenticated, setIsAuthenticated] = useState(BASE_URL)
 
   // New state for history items.
-  const [historyItems, setHistoryItems] = useState([
+  const historyItems = [
     { id: 1, name: 'Item 1', description: 'Description for Item 1', user: 'User 1', runtime: '10s', createdAt: new Date() },
     { id: 2, name: 'Item 2', description: 'Description for Item 2', user: 'User 2', runtime: '20s', createdAt: new Date() },
-  ])
+  ]
 
-  const getAvatarSrc = (user: string) => {
-    switch (user.toLowerCase()) {
-      case 'user':
-        return h1;
-      case 'magenticoneorchestrator':
-        return lBrain;
-      case 'coder':
-        return lPen;
-      case 'filesurfer':
-        return lSearch;
-      case 'websurfer':
-        return lSearch;
-      case 'ragagent':
-        return lSearch;
-      case 'executor':
-        return lPen;
-      case 'taskresult':
-        return lAi;
-      default:
-        return 'https://example.com/default.png';
-    }
-  };
-  const getAvatarFallback = (user: string) => {
-    switch (user.toLowerCase()) {
-      case 'user':
-        return 'U';
-      case 'magenticoneorchestrator':
-        return 'O';
-      case 'coder':
-        return 'C';
-      case 'filesurfer':
-        return 'F';
-      case 'websurfer':
-        return 'W';
-      case 'ragagent':
-        return 'R';
-      case 'executor':
-        return 'E';
-      case 'ai':
-        return 'AI';
-      default:
-        return 'D';
-    }
-  };
+//   const getAvatarSrc = (user: string) => {
+//     switch (user.toLowerCase()) {
+//       case 'user':
+//         return h1;
+//       case 'magenticoneorchestrator':
+//         return lBrain;
+//       case 'coder':
+//         return lPen;
+//       case 'filesurfer':
+//         return lSearch;
+//       case 'websurfer':
+//         return lSearch;
+//       case 'ragagent':
+//         return lSearch;
+//       case 'executor':
+//         return lPen;
+//       case 'taskresult':
+//         return lAi;
+//       default:
+//         return 'https://example.com/default.png';
+//     }
+//   };
+//   const getAvatarFallback = (user: string) => {
+//     switch (user.toLowerCase()) {
+//       case 'user':
+//         return 'U';
+//       case 'magenticoneorchestrator':
+//         return 'O';
+//       case 'coder':
+//         return 'C';
+//       case 'filesurfer':
+//         return 'F';
+//       case 'websurfer':
+//         return 'W';
+//       case 'ragagent':
+//         return 'R';
+//       case 'executor':
+//         return 'E';
+//       case 'ai':
+//         return 'AI';
+//       default:
+//         return 'D';
+//     }
+//   };
 
   /// TODO: better login -> MS EntraID
   const handleLogin = (email: string, password: string) => {

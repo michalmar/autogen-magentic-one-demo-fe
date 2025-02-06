@@ -16,15 +16,15 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bot, Plus, Loader2, LogOut} from "lucide-react"
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Bot, Plus, LogOut} from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // import remarkBreaks from 'remark-breaks'
-import { Textarea } from "@/components/ui/textarea"
+// import { Textarea } from "@/components/ui/textarea"
 
 import { AgentsSetup } from '@/components/agents-setup';
-import { MarkdownRenderer } from '@/components/markdown-display';
+// import { MarkdownRenderer } from '@/components/markdown-display';
 import { ModeToggle } from '@/components/mode-toggle'
 import { LoginCard } from "@/components/login";
 
@@ -50,18 +50,7 @@ const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 // console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
 
 
-interface ChatMessage {
-  user: string;
-  message: string;
-  time?: string;
-  type?: string;
-  source?: string;
-  content?: string;
-  stop_reason?: string;
-  models_usage?: string;
-  content_image?: string;
-  session_id?: string;
-}
+
 
 interface Agent {
   input_key: string;
@@ -76,17 +65,8 @@ interface Agent {
 
 export default function Agents() {
 
-  const wellcomeMessage: ChatMessage = {
-    user: 'MagenticOneOrchestrator',
-    message: "My team is ready to assist you. Please type your task below to start.",
-    // message: sampleMarkdown,
-    time: new Date().toISOString(),
-    // content: response.data.content,
-    source: 'MagenticOneOrchestrator',
-    session_id: 'dummy-generated-session-id',
-  };
   
-  const [sessionID, setSessionID] = useState('')
+//   const [sessionID, setSessionID] = useState('')
   const [isAuthenticated, setIsAuthenticated] = useState(BASE_URL)
   
   const [agents, setAgents] = useState<Agent[]>([
@@ -183,28 +163,7 @@ export default function Agents() {
         return 'https://example.com/default.png';
     }
   };
-  const getAvatarFallback = (user: string) => {
-    switch (user.toLowerCase()) {
-      case 'user':
-        return 'U';
-      case 'magenticoneorchestrator':
-        return 'O';
-      case 'coder':
-        return 'C';
-      case 'filesurfer':
-        return 'F';
-      case 'websurfer':
-        return 'W';
-      case 'ragagent':
-        return 'R';
-      case 'executor':
-        return 'E';
-      case 'ai':
-        return 'AI';
-      default:
-        return 'D';
-    }
-  };
+
 
 
   /// TODO: better login -> MS EntraID
