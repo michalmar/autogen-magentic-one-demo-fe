@@ -59,7 +59,7 @@ const data = {
       ],
     },
     {
-      title: "Agents",
+      title: "Agent Teams",
       url: "/agents", // updated to route directly to Agents page
       icon: Bot,
       items: [
