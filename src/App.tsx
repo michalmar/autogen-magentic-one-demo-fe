@@ -45,9 +45,9 @@ const ALLWAYS_LOGGED_IN =
   import.meta.env.VITE_ALLWAYS_LOGGED_IN === "true" ? true : false;
 const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 
-console.log('VITE_BASE_URL:', BASE_URL);
-console.log('VITE_ALLWAYS_LOGGED_IN:', ALLWAYS_LOGGED_IN);
-console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
+// console.log('VITE_BASE_URL:', BASE_URL);
+// console.log('VITE_ALLWAYS_LOGGED_IN:', ALLWAYS_LOGGED_IN);
+// console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
 
 
 interface ChatMessage {
@@ -368,14 +368,14 @@ export default function App() {
     setChatHistory([...chatHistory, newMessage]);
     // Start timer
     const startTime = Date.now();
-    console.log('VITE_BASE_URL:', BASE_URL);
+
     try {
       const response = await axios.post(`${BASE_URL}/start`, { content: userMessage, agents: JSON.stringify(agents) });
       const sessionId = response.data.response;  // Get the session ID from the response
       setSessionID(sessionId);
       const eventSource = new EventSource(`${BASE_URL}/chat-stream?session_id=${encodeURIComponent(sessionId)}`);
       eventSource.onmessage = (event) => {
-        console.log('EventSource message:', event.data);
+        // console.log('EventSource message:', event.data);
         const data = JSON.parse(event.data);
         if (data.stop_reason) {
           setIsTyping(false);
@@ -577,6 +577,7 @@ export default function App() {
           <img src={ag} alt="Logo" className='w-[18px] inline'/>
           <p className='inline'>&nbsp;running on </p>
           <img src={aAif} alt="Logo" className='w-[18px] inline'/>
+          <p className='inline'>&nbsp;ver. 20250206.2</p>
         </div>
       </footer>
       </SidebarInset>
