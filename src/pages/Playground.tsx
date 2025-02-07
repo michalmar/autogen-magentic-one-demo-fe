@@ -190,7 +190,7 @@ export default function App() {
   const [userMessage, setUserMessage] = useState('')
   const [sessionTime, setSessionTime] = useState('')
   // const [files, setFiles] = useState<{ name: string, size: number, date: string }[]>([])
-  const [isAuthenticated, setIsAuthenticated] = useState(BASE_URL)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
   // const [fileUpload, setFileUpload] = useState<File | null>(null)
   // const [isFileCardVisible, setIsFileCardVisible] = useState(false)
   // const [isSettingsCardVisible, setIsSettingsCardVisible] = useState(false)
@@ -506,6 +506,7 @@ export default function App() {
                 <Button variant="outline" onClick={() => setUserMessage("Find me a French restaurant in Dubai with 2 Michelin stars?")} className="text-sm">Find restaurant...</Button>
                 <Button variant="outline" onClick={() => setUserMessage("When and where is the next game of Arsenal, print a link for purchase")}>Check football game...</Button>
                 <Button variant="outline" onClick={() => setUserMessage("Generate a python script and execute Fibonacci series below 1000")}>Generate script...</Button>
+                <Button variant="outline" onClick={() => setUserMessage("Use advanced financial modelling, scenario analysis, geopolitical forecasting, and risk quantification to produce a comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements. In this process, identify and deeply evaluate the relative growth potential of various upstream investment areas—ranging from unconventional reservoirs to deepwater projects and advanced EOR techniques—across Africa, the Middle East, and Central Europe. Based on publicly available data (e.g., IEA, EIA, and OPEC bulletins), synthesize your findings into specific, country-level recommendations that incorporate ROI calculations, scenario-based risk assessments, and robust justifications reflecting both market and geopolitical considerations. Present the final deliverable as a well-structured table​")} className="text-sm">Market assessment...</Button>
               </div>
               </CardHeader>
               <CardContent className="flex-1 h-96">
