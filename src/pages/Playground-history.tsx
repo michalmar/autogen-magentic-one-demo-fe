@@ -122,7 +122,7 @@ export default function PlaygroundHistory() {
     async function fetchHistory() {
       try {
         setIsHistoryLoading(true);
-        const response = await axios.post('http://localhost:8000/conversations');
+        const response = await axios.post(`${BASE_URL}/conversations`);
         console.log('Response:', response.data);
         setHistoryItems(response.data);
         setIsHistoryLoading(false);
@@ -204,7 +204,7 @@ export default function PlaygroundHistory() {
                   </CardHeader>
                   {isHistoryLoading ? (
                     <CardContent className="flex-1 h-96 overflow-auto">
-                      <Loader2 className="h-12 w-12" />
+                      <Loader2 className="lucide lucide-loader2 mr-2 h-4 animate-spin" />
                     </CardContent> 
                   ) : (
                     <CardContent className="flex-1 h-96 overflow-auto">
