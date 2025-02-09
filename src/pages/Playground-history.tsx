@@ -26,7 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 import { ModeToggle } from '@/components/mode-toggle'
 import { LoginCard } from "@/components/login"
 
@@ -280,8 +280,8 @@ export default function PlaygroundHistory() {
                     return (
                       <div className="space-y-2">
                         {conversation.messages
-                          .filter((message) => message.source) // only display messages with defined source
-                          .map((message, index) => (
+                          .filter((message: any) => message.source) // only display messages with defined source
+                          .map((message: any, index: any) => (
                           
                           <div key={index} className={`flex ${message.source.toLowerCase() === 'user' ? 'justify-end' : 'justify-start'}`}>
                           <div className={`p-2 rounded-lg shadow ${message.source.toLowerCase() === 'user' ? 'group/message relative break-words rounded-lg p-3 text-sm sm:max-w-[70%] bg-primary text-primary-foreground duration-300 animate-in fade-in-0 zoom-in-75 origin-bottom-right' : 'group/message relative break-words rounded-lg p-3 text-sm sm:max-w-[96%] bg-muted text-foreground duration-300 animate-in fade-in-0 zoom-in-75 origin-bottom-left'}`}>
