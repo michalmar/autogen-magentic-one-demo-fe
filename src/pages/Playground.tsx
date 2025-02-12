@@ -36,6 +36,7 @@ import lSearch from '@/assets/l-search.png';
 import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 
 // TODO: FUJ! How to get ENV vars from SWA?
@@ -617,10 +618,9 @@ export default function App() {
   };
 
   // Handler for team selection change
-  const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTeamId(e.target.value);
-    // update agents based on selected team
-    const selectedTeam = teams.find(team => team.teamId === e.target.value);
+  const handleTeamValueChange = (value: string) => {
+    setSelectedTeamId(value);
+    const selectedTeam = teams.find(team => team.teamId === value);
     if (selectedTeam) {
       setAgents(selectedTeam.agents);
     }
@@ -702,18 +702,18 @@ export default function App() {
         {/* New UI for team selection */}
         <div className="p-4">
           <label htmlFor="teamSelect" className="mr-2 text-sm text-muted-foreground">Select Team:</label>
-          <select 
-            id="teamSelect" 
-            onChange={handleTeamChange} 
-            value={selectedTeamId}
-            className="p-1 border rounded"
-          >
-            {teams.map((team) => (
-              <option key={team.teamId} value={team.teamId}>
-                {team.name}
-              </option>
-            ))}
-          </select>
+          <Select value={selectedTeamId} onValueChange={(value) => handleTeamValueChange(value)}>
+            <SelectTrigger id="teamSelect" className="p-1 border rounded">
+              <SelectValue placeholder="Select a team" />
+            </SelectTrigger>
+            <SelectContent>
+              {teams.map((team) => (
+                <SelectItem key={team.teamId} value={team.teamId}>
+                  {team.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <Separator  />
