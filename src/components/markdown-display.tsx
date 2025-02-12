@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Button } from "@/components/ui/button"
@@ -53,13 +54,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ inline = false, className, childr
 interface MarkdownRendererProps {
   markdownText: string
 }
-// export function AgentsSetup({ agents, removeAgent, addAgent, addRAGAgent, getAvatarSrc }: AgentsSetupProps) {
-export function MarkdownRenderer({ markdownText} : MarkdownRendererProps)  {
+
+export function MarkdownRenderer({ markdownText } : MarkdownRendererProps)  {
   return (
-      <ReactMarkdown components={{ code: CodeBlock }}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ code: CodeBlock }}>
         {markdownText}
       </ReactMarkdown>
   )
 }
-
-// export default MarkdownRenderer
