@@ -50,7 +50,7 @@ const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 // console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
 
 
-import { agentsTeam1, agentsTeam2, agentsTeam3 } from '@/components/agents-definition';
+import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4} from '@/components/agents-definition';
 
 interface Agent {
   input_key: string;
@@ -131,6 +131,12 @@ export default function Agents() {
         name: 'Team Safety & Incident Reporting',
         agents: agentsTeam3,
         description: 'Team focused on Safety & Incident Reporting tasks. Besides default agents includes RAG agent for BSEE Incident Reporting & HSE Compliance Guidelines 2024 and Compliance Sentinel agent, the watchdog for our incident reporting system at Well Site and Trend Analyzer agent, responsible for scrutinizing historical incident data to identify recurring patterns and underlying causes'
+      },
+      {
+        teamId: 'team-4',
+        name: 'Team Decision Support on Market Analysis',
+        agents: agentsTeam4,
+        description: 'Team helping with decision support on comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements.'
       }
     ]);
 

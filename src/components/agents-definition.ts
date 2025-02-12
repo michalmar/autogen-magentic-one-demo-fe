@@ -464,6 +464,53 @@ Reply "TERMINATE" in the end when everything is done.
         },
   ];
 
+export const agentsTeam4: Agent[] = [
+    {
+      input_key: "0001",
+      type: "MagenticOne",
+      name: "Coder",
+      system_message: "",
+      description: "",
+      icon: "👨‍💻",
+      index_name: ""
+    },
+    {
+      input_key: "0002",
+      type: "MagenticOne",
+      name: "Executor",
+      system_message: "",
+      description: "",
+      icon: "💻",
+      index_name: ""
+    },
+    {
+      input_key: "0003",
+      type: "MagenticOne",
+      name: "FileSurfer",
+      system_message: "",
+      description: "",
+      icon: "📂",
+      index_name: ""
+    },
+    {
+      input_key: "0004",
+      type: "MagenticOne",
+      name: "WebSurfer",
+      system_message: "",
+      description: "",
+      icon: "🏄‍♂️",
+      index_name: ""
+    },
+    {
+      input_key:"0006",
+      type:"RAG",
+      name:"OilGasKnowledge",
+      system_message:"",
+      description:"An agent that has access to a knowledge base of International Energy Agency (IEA) Analysis and forecast to 2030 and can handle RAG tasks, call this agent if you are getting questions on your knowledge base.",
+      icon:"📖",
+      index_name:"ag-demo-market"
+      }
+  ];
 
 //   const sampleMarkdown = `
 // # Sample Markdown Document

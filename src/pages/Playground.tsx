@@ -38,7 +38,7 @@ import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { agentsTeam1, agentsTeam2, agentsTeam3 } from '@/components/agents-definition';
+import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4 } from '@/components/agents-definition';
 // TODO: FUJ! How to get ENV vars from SWA?
 // Define environment variables with default values
 const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be2.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
@@ -128,6 +128,12 @@ export default function App() {
       name: 'Team Safety & Incident Reporting',
       agents: agentsTeam3,
       description: 'Team focused on Safety & Incident Reporting tasks. Besides default agents includes RAG agent for BSEE Incident Reporting & HSE Compliance Guidelines 2024 and Compliance Sentinel agent, the watchdog for our incident reporting system at Well Site and Trend Analyzer agent, responsible for scrutinizing historical incident data to identify recurring patterns and underlying causes'
+    },
+    {
+      teamId: 'team-4',
+      name: 'Team Decision Support on Market Analysis',
+      agents: agentsTeam4,
+      description: 'Team helping with decision support on comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements.'
     }
   ]);
   const [selectedTeamId, setSelectedTeamId] = useState('team-1');
@@ -514,7 +520,7 @@ export default function App() {
           <img src={ag} alt="Logo" className='w-[18px] inline'/>
           <p className='inline'>&nbsp;running on </p>
           <img src={aAif} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;ver. 20250212.3</p>
+          <p className='inline'>&nbsp;ver. 20250212.4</p>
         </div>
       </footer>
       </SidebarInset>
