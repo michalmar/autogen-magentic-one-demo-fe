@@ -17,7 +17,7 @@ import {
 import { ThemeProvider } from "@/components/theme-provider"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bot, Plus, LogOut} from "lucide-react"
+import { Bot, Plus, LogOut, Download, Delete} from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // import remarkBreaks from 'remark-breaks'
@@ -50,7 +50,7 @@ const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 // console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
 
 
-
+import { agentsTeam1, agentsTeam2, agentsTeam3 } from '@/components/agents-definition';
 
 interface Agent {
   input_key: string;
@@ -61,7 +61,12 @@ interface Agent {
   icon: string;
   index_name: string;
 }
-
+interface Team {
+  teamId: string;
+  name: string;
+  agents: Agent[];
+  description?: string;
+}
 
 export default function Agents() {
 
@@ -107,6 +112,27 @@ export default function Agents() {
       index_name: ""
     }
   ]);
+   // New states for teams and selected team
+    const [teams] = useState<Team[]>([
+      {
+        teamId: 'team-1',
+        name: 'MagenticOne Team',
+        agents: agentsTeam1,
+        description: 'Original MagenticOne Team. Includes Coder, Executor, FileSurfer and WebSurfer.'
+      },
+      {
+        teamId: 'team-2',
+        name: 'Team Predictive Maintenance',
+        agents: agentsTeam2,
+        description: 'Team focused on Predictive Maintenance tasks. Besides default agents includes RAG agent for Emerson Predictive Maintenance Guide and Sentinel Sentinel agent specialized in monitoring sensor streams and detecting trends or anomalies for particular device.'
+      },
+      {
+        teamId: 'team-3',
+        name: 'Team Safety & Incident Reporting',
+        agents: agentsTeam3,
+        description: 'Team focused on Safety & Incident Reporting tasks. Besides default agents includes RAG agent for BSEE Incident Reporting & HSE Compliance Guidelines 2024 and Compliance Sentinel agent, the watchdog for our incident reporting system at Well Site and Trend Analyzer agent, responsible for scrutinizing historical incident data to identify recurring patterns and underlying causes'
+      }
+    ]);
 
 
   
@@ -225,44 +251,64 @@ export default function Agents() {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <Separator  />
           {/* Agents setup */}
+          {teams.map((team) => (
+            <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
+              {/* Chat Interface */}
+              <Card className={`md:col-span-2 flex flex-col`}>
+                <CardHeader>
+                  <CardTitle>{team.name}</CardTitle>
+                  <Separator />
+                  <div className="space-x-2 container">
+                    <p className="text-sm text-muted-foreground inline">{team.description}</p>
+                </div>
+                </CardHeader>
+                <CardContent className="flex-1 h-96">
+                  
+                  <AgentsSetup
+                  agents={team.agents}
+                  removeAgent={removeAgent}
+                  addAgent={addAgent}
+                  addRAGAgent={addRAGAgent}
+                  getAvatarSrc={getAvatarSrc}
+                  />
+                </CardContent>
+                <CardFooter className="flex space-x-2">
+           
+                </CardFooter>
+              </Card>
+  
+              
+            </div> 
+          ))}
           
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
             {/* Chat Interface */}
             <Card className={`md:col-span-2 flex flex-col`}>
               <CardHeader>
-                <CardTitle>Team: MagenticOne</CardTitle>
-                <div className="space-x-2 container text-center"><p className="text-sm text-muted-foreground inline">Quick actions:</p>
-                <AgentsSetup
-                agents={agents}
-                removeAgent={removeAgent}
-                addAgent={addAgent}
-                addRAGAgent={addRAGAgent}
-                getAvatarSrc={getAvatarSrc}
-                />
-              </div>
+                <CardTitle>Team Management</CardTitle>
               </CardHeader>
               <CardContent className="flex-1 h-96">
-                <Separator />
-                <div className="space-y-4">
-                  {/* {chatHistory.map((message, index) => (
-                    <div></div>
-                  ))} */}
-
-                  
-                
-                </div>
+                {/* <Separator className="my-2 invisible" /> */}
+  
+                <Button size="sm" variant="default" className="">
+                  <Plus className="h-4 w-4" />
+                  Create new team
+                </Button>
+                <Separator orientation="vertical" className="mr-2 h-4 invisible" />
+                <Button variant="outline" size="sm">
+                  <Download className="h-4 w-4" />
+                  Download team specification
+                </Button>
+                <Separator orientation="vertical" className="mr-2 h-4 invisible" />
+                <Button variant="destructive" size="sm">
+                  <Delete className="h-4 w-4" />
+                  Delete team
+                </Button>
               </CardContent>
               <CardFooter className="flex space-x-2">
          
               </CardFooter>
             </Card>
-
-            <Separator className="my-2 invisible" />
-
-            <Button size="sm" variant="default" className="">
-              <Plus className="h-4 w-4" />
-              Create new team
-            </Button>
           </div> 
         </div>
         {/* Footer */}
