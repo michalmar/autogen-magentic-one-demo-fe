@@ -79,6 +79,7 @@ interface Team {
   teamId: string;
   name: string;
   agents: Agent[];
+  description?: string;
 }
 
 
@@ -113,17 +114,20 @@ export default function App() {
     {
       teamId: 'team-1',
       name: 'MagenticOne Team',
-      agents: agentsTeam1
+      agents: agentsTeam1,
+      description: 'Original MagenticOne Team. Includes Coder, Executor, FileSurfer and WebSurfer.'
     },
     {
       teamId: 'team-2',
       name: 'Team Predictive Maintenance',
-      agents: agentsTeam2
+      agents: agentsTeam2,
+      description: 'Team focused on Predictive Maintenance tasks. Besides default agents includes RAG agent for Emerson Predictive Maintenance Guide and Sentinel Sentinel agent specialized in monitoring sensor streams and detecting trends or anomalies for particular device.'
     },
     {
       teamId: 'team-3',
       name: 'Team Safety & Incident Reporting',
-      agents: agentsTeam3
+      agents: agentsTeam3,
+      description: 'Team focused on Safety & Incident Reporting tasks. Besides default agents includes RAG agent for BSEE Incident Reporting & HSE Compliance Guidelines 2024 and Compliance Sentinel agent, the watchdog for our incident reporting system at Well Site and Trend Analyzer agent, responsible for scrutinizing historical incident data to identify recurring patterns and underlying causes'
     }
   ]);
   const [selectedTeamId, setSelectedTeamId] = useState('team-1');
