@@ -724,7 +724,7 @@ Reply "TERMINATE" in the end when everything is done.
   const [agents, setAgents] = useState<Agent[]>(agentsTeam1);
 
   // New states for teams and selected team
-  const [teams, setTeams] = useState<Team[]>([
+  const [teams] = useState<Team[]>([
     {
       teamId: 'team-1',
       name: 'MagenticOne Team',
@@ -1125,7 +1125,7 @@ Reply "TERMINATE" in the end when everything is done.
           <img src={ag} alt="Logo" className='w-[18px] inline'/>
           <p className='inline'>&nbsp;running on </p>
           <img src={aAif} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;ver. 20250206.2</p>
+          <p className='inline'>&nbsp;ver. 20250212.1</p>
         </div>
       </footer>
       </SidebarInset>
