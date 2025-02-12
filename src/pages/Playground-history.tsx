@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bot, LogOut, Download, Delete, Pencil, Loader2 } from "lucide-react"
+import { Bot, LogOut, Download, Delete, Loader2, Eye } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import {
@@ -146,6 +146,16 @@ export default function PlaygroundHistory() {
     setIsAuthenticated(false)
   }
 
+  const handleDeleteSession = async (sessionId: string) => {
+    try {
+      await axios.post(`${BASE_URL}/conversations/delete?session_id=${sessionId}`);
+      // Remove the deleted session from the state
+      setHistoryItems(prev => prev.filter(item => item.session_id !== sessionId));
+    } catch (error) {
+      console.error("Failed to delete session:", error);
+    }
+  };
+
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       {!isAuthenticated ? (
@@ -231,9 +241,12 @@ export default function PlaygroundHistory() {
                                 <TableCell>{item.timestamp}</TableCell>
                                 {/* <TableCell>{item.runtime}</TableCell> */}
                                 <TableCell className="text-right">
-                                  <Button variant="outline" size="sm" onClick={() => handleShowDetails(item.session_id)}>
-                                    <Pencil className="mr-2 h-4 w-4" />
-                                    Details
+                                  <Button variant="outline" size="icon" onClick={() => handleShowDetails(item.session_id)}>
+                                    <Eye />
+                                  </Button>
+                                  &nbsp;&nbsp;
+                                  <Button variant="destructive" size="icon" onClick={() => handleDeleteSession(item.session_id)}>
+                                    <Delete  />
                                   </Button>
                                 </TableCell>
                               </TableRow>
