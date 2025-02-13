@@ -65,7 +65,7 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "AutoGen",
+          title: "Library",
           url: "/agents", // route to Agents page
         },
         // ...existing code if additional links are required...

@@ -177,7 +177,7 @@ export default function PlaygroundHistory() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator className="hidden md:block" />
                     <BreadcrumbItem>
-                      <BreadcrumbPage>Playground</BreadcrumbPage>
+                      <BreadcrumbPage>History</BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
                 </Breadcrumb>

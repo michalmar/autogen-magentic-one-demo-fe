@@ -234,7 +234,7 @@ export default function Agents() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Playground</BreadcrumbPage>
+                  <BreadcrumbPage>Library</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
