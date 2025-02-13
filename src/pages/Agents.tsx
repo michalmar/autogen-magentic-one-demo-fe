@@ -324,7 +324,7 @@ export default function Agents() {
           <img src={ag} alt="Logo" className='w-[18px] inline'/>
           <p className='inline'>&nbsp;running on </p>
           <img src={aAif} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;ver. 20250206.2</p>
+          <p className='inline'>&nbsp;ver. 20250206.5</p>
         </div>
       </footer>
       </SidebarInset>
