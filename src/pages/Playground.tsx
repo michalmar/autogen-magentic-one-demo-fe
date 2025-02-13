@@ -505,7 +505,7 @@ export default function App() {
                     }
                   }}
                   placeholder="Type a message..."
-                  className="z-10 w-full grow resize-none rounded-xl border border-input bg-background p-3 pr-24 text-sm ring-offset-background transition-[border] placeholder:text-muted-foreground focus-visible:border-primary focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                  className="z-10 w-full h-36 grow resize-none rounded-xl border border-input bg-background p-3 pr-24 text-sm ring-offset-background transition-[border] placeholder:text-muted-foreground focus-visible:border-primary focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                   disabled={isTyping}
                 />
                 <Button onClick={handleSendStreamingMessage} disabled={isTyping}>Send</Button>
