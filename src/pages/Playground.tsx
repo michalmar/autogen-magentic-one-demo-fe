@@ -63,6 +63,7 @@ interface ChatMessage {
   models_usage?: string;
   content_image?: string;
   session_id?: string;
+  elapsed_time?: number;
 }
 
 interface Agent {
@@ -311,6 +312,8 @@ export default function App() {
           stop_reason: data.stop_reason,
           models_usage: data.models_usage,
           content_image: data.content_image,
+          session_id: data.session_id,
+          elapsed_time: data.elapsed_time,
         };
   
         setChatHistory((prev) => [...prev, aiMessage]);
@@ -470,6 +473,7 @@ export default function App() {
                               <img src={`${message.content_image}`} alt="content" className="mt-2 max-w-[625px]" />
                             )}
                             {/* <MarkdownRenderer>{message.message}</MarkdownRenderer> */}
+                            <p className="text-xs text-muted-foreground">{message.time && new Date(message.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit',hour12: false })}</p>
                           </div>
                         </div>
                       </div>
