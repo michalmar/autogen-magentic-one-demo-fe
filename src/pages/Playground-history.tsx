@@ -312,7 +312,7 @@ export default function PlaygroundHistory() {
                                   <img src={`${message.content_image}`} alt="content" className="mt-2 max-w-[625px]" />
                                 )}
                                 {/* <MarkdownRenderer>{message.message}</MarkdownRenderer> */}
-                                <p className="text-xs text-muted-foreground">{message.time && new Date(message.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit',hour12: false })}</p>
+                                {/* <p className="text-xs text-muted-foreground">{message.time && new Date(message.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit',hour12: false })}</p> */}
                               </div>
                             </div>
                           </div>
