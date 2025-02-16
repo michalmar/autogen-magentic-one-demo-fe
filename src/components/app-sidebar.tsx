@@ -15,29 +15,39 @@ import {
 import { NavMain } from "@/components/nav-main"
 // import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+// import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   // SidebarRail,
-  SidebarTrigger
+  // SidebarTrigger
 } from "@/components/ui/sidebar"
-import ag from '@/assets/ag.png';
+import h1 from '@/assets/h1.png';
 
 // This is sample data.
 const data = {
   user: {
-    name: "demo",
-    email: "m@example.com",
-    avatar: ag,
+    name: "Jon Doe",
+    email: "johne@microsoft.com",
+    avatar: h1,
   },
   teams: [
     {
-      name: "AutoGen",
+      name: "MagenticOne",
       logo: AudioWaveform,
-      plan: "Demo",
+      plan: "General",
+    },
+    {
+      name: "Predictive Maintenance",
+      logo: AudioWaveform,
+      plan: "General",
+    },
+    {
+      name: "MagenticThree",
+      logo: AudioWaveform,
+      plan: "General",
     },
   ],
   navMain: [
@@ -133,15 +143,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <SidebarTrigger size="icon"  />
-        <TeamSwitcher teams={data.teams} />
+        <NavUser user={data.user} />
+        {/* <img src={banner} alt="AutoGen" style={{width: '100%'}} /> */}
+        {/* <SidebarTrigger size="icon"  /> */}
+        {/* <TeamSwitcher teams={data.teams} /> */}
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
       </SidebarFooter>
 
     </Sidebar>

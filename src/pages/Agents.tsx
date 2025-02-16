@@ -282,6 +282,7 @@ export default function Agents() {
                   addAgent={addAgent}
                   addRAGAgent={addRAGAgent}
                   getAvatarSrc={getAvatarSrc}
+                  isCollapsed={false}
                   />
                 </CardContent>
                 <CardFooter className="flex space-x-2">

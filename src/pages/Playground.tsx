@@ -14,9 +14,10 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+// import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter} from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bot, Dot, Loader2, LogOut} from "lucide-react"
+import {  ChartNoAxesCombined, DollarSign, Dot, Loader2, SendHorizonal, ShieldAlert, Soup, Terminal, Volleyball, Wrench} from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // import remarkBreaks from 'remark-breaks'
@@ -36,6 +37,7 @@ import lSearch from '@/assets/l-search.png';
 import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4, agentsTeamFSI1 } from '@/components/agents-definition';
@@ -82,8 +84,6 @@ interface Team {
   agents: Agent[];
   description?: string;
 }
-
-
 export default function App() {
 
   const wellcomeMessage: ChatMessage = {
@@ -355,9 +355,9 @@ export default function App() {
     }
   }
 
-  const handleLogout = () => {
-    setIsAuthenticated(false)
-  }
+  // const handleLogout = () => {
+  //   setIsAuthenticated(false)
+  // }
 
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
@@ -367,10 +367,12 @@ export default function App() {
     <SidebarProvider defaultOpen={true}>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex sticky top-0 bg-background h-12 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
+        <header className="flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
           <div className="flex items-center gap-2 px-4 w-full">
+            {/* <img src={banner} alt="Banner" className="h-64" /> */}
             {/* <SidebarTrigger />   */}
-            <Bot className="h-8 w-8" />
+            {/* <Bot className="h-8 w-8" /> */}
+            <img src={ag  } alt="Banner" className="h-8" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
@@ -386,39 +388,23 @@ export default function App() {
               </BreadcrumbList>
             </Breadcrumb>
             <div className="ml-auto hidden items-center gap-2 md:flex">
-            {/* if session is running display loader */}
-            {/* if the session end display elapsed time */}
-            {sessionTime && !isTyping ? (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <p className='text-sm text-muted-foreground'>Session {sessionID} completed in {sessionTime}s.</p>
-                <Button variant="secondary" onClick={() => stopSession()}>
-                  Run new
-                </Button>
-              </div>
-            ) : null}
-            {isTyping ? (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <p className='text-sm text-muted-foreground'>Running {sessionID} session...</p>
-                <Loader2 className="lucide lucide-loader2 mr-2 h-4 animate-spin loader-green" />
-                {/* button to stop the session */}
-                <Button variant="destructive" onClick={() => stopSession()}>Stop</Button>
-              </div>
-            ) : <p className='text-sm text-muted-foreground loader-green'>  ready</p>}
+        
    
-            <Separator orientation="vertical" className="mr-2 h-4" />
+            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
             <ModeToggle />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            {isAuthenticated ? (
+            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
+            {/* {isAuthenticated ? (
               <Button variant="outline" onClick={handleLogout}>
                 <LogOut />Log out
               </Button>
-            ) : null}
+            ) : null} */}
                 
             </div>
           </div>
         </header>
         {/* Main content */}
         {/* New UI for team selection */}
+        {!(isTyping || (sessionTime) ? true : false) ? (
         <div className="p-4">
           <label htmlFor="teamSelect" className="mr-2 text-sm text-muted-foreground">Select Team:</label>
           <Select value={selectedTeamId} onValueChange={(value) => handleTeamValueChange(value)}>
@@ -434,6 +420,9 @@ export default function App() {
             </SelectContent>
           </Select>
         </div>
+        ): null}
+       
+
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <Separator  />
           {/* Agents setup */}
@@ -443,24 +432,33 @@ export default function App() {
               addAgent={addAgent}
               addRAGAgent={addRAGAgent}
               getAvatarSrc={getAvatarSrc}
+              isCollapsed={isTyping || (sessionTime) ? true : false}
             />
+           {/* if session is running display loader */}
+        {/* if the session end display elapsed time */}
+        <div className="flex gap-0 p-2 pt-0 justify-end">
+          {sessionTime && !isTyping ? (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <p className='text-sm text-muted-foreground'>Session {sessionID} completed in {sessionTime}s.</p>
+              <Button variant="secondary" onClick={() => stopSession()}>
+                Run new
+              </Button>
+            </div>
+          ) : null}
+          {isTyping ? (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <p className='text-sm text-muted-foreground'>Running {sessionID} session...</p>
+              <Loader2 className="lucide lucide-loader2 mr-2 h-4 animate-spin loader-green" />
+              {/* button to stop the session */}
+              <Button variant="destructive" onClick={() => stopSession()}>Stop</Button>
+            </div>
+          ) : <p className='text-sm text-muted-foreground loader-green'></p>}
+        </div>
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
             {/* Chat Interface */}
             <Card className={`md:col-span-2 h-full flex flex-col`}>
-              <CardHeader>
-                <CardTitle>AutoGen Chat</CardTitle>
-                <div className="space-x-2 container text-center"><p className="text-sm text-muted-foreground inline">Quick actions:</p>
-                <Button variant="outline" onClick={() => setUserMessage("Find me a French restaurant in Dubai with 2 Michelin stars?")} className="text-sm">Find restaurant...</Button>
-                <Button variant="outline" onClick={() => setUserMessage("When and where is the next game of Arsenal, print a link for purchase")}>Check football game...</Button>
-                <Button variant="outline" onClick={() => setUserMessage("Generate a python script and execute Fibonacci series below 1000")}>Generate script...</Button>
-                <Button variant="outline" onClick={() => setUserMessage("Use advanced financial modelling, scenario analysis, geopolitical forecasting, and risk quantification to produce a comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements. In this process, identify and deeply evaluate the relative growth potential of various upstream investment areas—ranging from unconventional reservoirs to deepwater projects and advanced EOR techniques—across Africa, the Middle East, and Central Europe. Based on publicly available data (e.g., IEA, EIA, and OPEC bulletins), synthesize your findings into specific, country-level recommendations that incorporate ROI calculations, scenario-based risk assessments, and robust justifications reflecting both market and geopolitical considerations. Present the final deliverable as a well-structured table​")} className="text-sm">Market assessment...</Button>
-                <Button variant={"outline"} onClick={() => setUserMessage("Analyze the sensor data and historical maintenance logs for the high‑pressure gas compressor (EquipmentID: COMP-001). Using real‑time measurements of temperature, vibration, and pressure, along with the asset’s running hours, detect any early signs of mechanical degradation. Correlate these findings with the vendor’s guidelines (downloaded from Emerson’s Predictive Maintenance Guide for Gas Compressors) and the maintenance history. In particular, determine if rising vibration amplitudes, combined with temperature excursions and delayed calibrations, suggest that the compressor is trending toward failure. Based on this analysis, generate a detailed maintenance alert including a prioritized repair schedule and recommended corrective actions to mitigate downtime.")}>Predictive Maintenance...</Button>
-                <Button variant={"outline"} onClick={() => setUserMessage("Analyze the internal incident reports for the upstream oil and gas facility (Asset: Well Site A-17) to detect compliance gaps. Using real‑time incident data (including near misses, safety violations, and environmental events) along with historical incident outcomes, correlate these findings with the updated BSEE Incident Reporting & HSE Compliance Guidelines 2024. Identify missing data fields or delayed reporting that do not meet the new regulatory requirements and generate a prioritized set of corrective recommendations to enhance incident reporting and overall safety compliance. Your output should include detailed observations on which aspects of the incident logs (e.g., incomplete descriptions, inconsistent outcome classifications) need improvement.​")}>Safety...</Button>
-                <Button variant="outline" onClick={() => setUserMessage("Analyze the financial transaction data for our customer base, focusing on identifying customers with frequent overdrafts, recurring cash flow gaps, and rapid declines in account balances. Use this analysis, combined with customer profile details (such as account balance, current loan amount, and credit score), and cross‑reference these findings with the risk thresholds from the Experian Credit Risk Scorecard PDF. Your task is to dynamically generate personalized upsell recommendations for each customer. The recommendations should include suggestions such as higher credit lines or tailored personal loans, with actionable insights based on each customer’s behavior.")}>Loan upsell...</Button>
-              </div>
-              </CardHeader>
               <CardContent className="flex-1 h-96">
-                <Separator />
+                <Separator className='my-2 invisible'/>
                 <div className="space-y-4">
                   {chatHistory.map((message, index) => (
                     <div key={index} className={`flex ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
@@ -505,20 +503,39 @@ export default function App() {
                   ) : null}
                 </div>
               </CardContent>
-              <CardFooter className="flex space-x-2">
-                <Textarea
-                  value={userMessage}
-                  onChange={(e) => setUserMessage(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleSendStreamingMessage();
-                    }
-                  }}
-                  placeholder="Type a message..."
-                  className="z-10 w-full h-36 grow resize-none rounded-xl border border-input bg-background p-3 pr-24 text-sm ring-offset-background transition-[border] placeholder:text-muted-foreground focus-visible:border-primary focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-                  disabled={isTyping}
-                />
-                <Button onClick={handleSendStreamingMessage} disabled={isTyping}>Send</Button>
+                           <CardFooter className="flex flex-col space-y-2">
+                <div className="relative w-full">
+                  <Textarea
+                    value={userMessage}
+                    onChange={(e) => setUserMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSendStreamingMessage();
+                      }
+                    }}
+                    placeholder="Type a message..."
+                    className="z-10 w-full h-36 grow resize-none rounded-xl border border-input bg-background p-3 pr-24 text-sm ring-offset-background transition-[border] placeholder:text-muted-foreground focus-visible:border-primary focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                    disabled={isTyping}
+                  />
+                  <Button 
+                    onClick={handleSendStreamingMessage} 
+                    disabled={isTyping}
+                    className="absolute bottom-2 right-2"
+                  >
+                    <SendHorizonal />
+                  </Button>
+                </div>
+                <div className="flex space-x-2">
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("Find me a French restaurant in Dubai with 2 Michelin stars?")}><Soup />Find restaurant...</Button>
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("When and where is the next game of Arsenal, print a link for purchase")}><Volleyball /> Check football game...</Button>
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("Generate a python script and execute Fibonacci series below 1000")}><Terminal />Generate script...</Button>
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("Use advanced financial modelling, scenario analysis, geopolitical forecasting, and risk quantification to produce a comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements. In this process, identify and deeply evaluate the relative growth potential of various upstream investment areas—ranging from unconventional reservoirs to deepwater projects and advanced EOR techniques—across Africa, the Middle East, and Central Europe. Based on publicly available data (e.g., IEA, EIA, and OPEC bulletins), synthesize your findings into specific, country-level recommendations that incorporate ROI calculations, scenario-based risk assessments, and robust justifications reflecting both market and geopolitical considerations. Present the final deliverable as a well-structured table​")}><ChartNoAxesCombined /> Market assessment...</Button>
+                </div>
+                <div className="flex space-x-2">
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("Analyze the sensor data and historical maintenance logs for the high‑pressure gas compressor (EquipmentID: COMP-001). Using real‑time measurements of temperature, vibration, and pressure, along with the asset’s running hours, detect any early signs of mechanical degradation. Correlate these findings with the vendor’s guidelines (downloaded from Emerson’s Predictive Maintenance Guide for Gas Compressors) and the maintenance history. In particular, determine if rising vibration amplitudes, combined with temperature excursions and delayed calibrations, suggest that the compressor is trending toward failure. Based on this analysis, generate a detailed maintenance alert including a prioritized repair schedule and recommended corrective actions to mitigate downtime.")}><Wrench /> Predictive Maintenance...</Button>
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("Analyze the internal incident reports for the upstream oil and gas facility (Asset: Well Site A-17) to detect compliance gaps. Using real‑time incident data (including near misses, safety violations, and environmental events) along with historical incident outcomes, correlate these findings with the updated BSEE Incident Reporting & HSE Compliance Guidelines 2024. Identify missing data fields or delayed reporting that do not meet the new regulatory requirements and generate a prioritized set of corrective recommendations to enhance incident reporting and overall safety compliance. Your output should include detailed observations on which aspects of the incident logs (e.g., incomplete descriptions, inconsistent outcome classifications) need improvement.​")}><ShieldAlert /> Safety...</Button>
+                <Button variant="outline" className="text-sm bg-muted" onClick={() => setUserMessage("Analyze the financial transaction data for our customer base, focusing on identifying customers with frequent overdrafts, recurring cash flow gaps, and rapid declines in account balances. Use this analysis, combined with customer profile details (such as account balance, current loan amount, and credit score), and cross‑reference these findings with the risk thresholds from the Experian Credit Risk Scorecard PDF. Your task is to dynamically generate personalized upsell recommendations for each customer. The recommendations should include suggestions such as higher credit lines or tailored personal loans, with actionable insights based on each customer’s behavior.")}><DollarSign /> Loan upsell...</Button>
+                </div>
               </CardFooter>
             </Card>
           </div>
