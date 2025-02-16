@@ -50,7 +50,7 @@ const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 // console.log('VITE_ACTIVATON_CODE:', ACTIVATION_CODE);
 
 
-import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4} from '@/components/agents-definition';
+import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4, agentsTeamFSI1} from '@/components/agents-definition';
 
 interface Agent {
   input_key: string;
@@ -137,7 +137,13 @@ export default function Agents() {
         name: 'Team Decision Support on Market Analysis',
         agents: agentsTeam4,
         description: 'Team helping with decision support on comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements.'
-      }
+      },
+      {
+        teamId: 'team-5',
+        name: 'Team FSI - Loan Upsell',
+        agents: agentsTeamFSI1,
+        description: 'Team focused on Financial Services Industry tasks. Namely Loan upsell scenario by analyzing financial transaction data for our customer base, focusing on identifying customers with frequent overdrafts, recurring cash flow gaps, and rapid declines in account balances.'
+      },
     ]);
 
 

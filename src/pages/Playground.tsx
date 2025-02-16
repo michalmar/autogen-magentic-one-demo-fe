@@ -38,7 +38,7 @@ import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4 } from '@/components/agents-definition';
+import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4, agentsTeamFSI1 } from '@/components/agents-definition';
 // TODO: FUJ! How to get ENV vars from SWA?
 // Define environment variables with default values
 const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be2.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
@@ -135,7 +135,13 @@ export default function App() {
       name: 'Team Decision Support on Market Analysis',
       agents: agentsTeam4,
       description: 'Team helping with decision support on comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements.'
-    }
+    },
+    {
+      teamId: 'team-5',
+      name: 'Team FSI - Loan Upsell',
+      agents: agentsTeamFSI1,
+      description: 'Team focused on Financial Services Industry tasks. Namely Loan upsell scenario by analyzing financial transaction data for our customer base, focusing on identifying customers with frequent overdrafts, recurring cash flow gaps, and rapid declines in account balances.'
+    },
   ]);
   const [selectedTeamId, setSelectedTeamId] = useState('team-1');
 
@@ -450,7 +456,7 @@ export default function App() {
                 <Button variant="outline" onClick={() => setUserMessage("Use advanced financial modelling, scenario analysis, geopolitical forecasting, and risk quantification to produce a comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements. In this process, identify and deeply evaluate the relative growth potential of various upstream investment areas—ranging from unconventional reservoirs to deepwater projects and advanced EOR techniques—across Africa, the Middle East, and Central Europe. Based on publicly available data (e.g., IEA, EIA, and OPEC bulletins), synthesize your findings into specific, country-level recommendations that incorporate ROI calculations, scenario-based risk assessments, and robust justifications reflecting both market and geopolitical considerations. Present the final deliverable as a well-structured table​")} className="text-sm">Market assessment...</Button>
                 <Button variant={"outline"} onClick={() => setUserMessage("Analyze the sensor data and historical maintenance logs for the high‑pressure gas compressor (EquipmentID: COMP-001). Using real‑time measurements of temperature, vibration, and pressure, along with the asset’s running hours, detect any early signs of mechanical degradation. Correlate these findings with the vendor’s guidelines (downloaded from Emerson’s Predictive Maintenance Guide for Gas Compressors) and the maintenance history. In particular, determine if rising vibration amplitudes, combined with temperature excursions and delayed calibrations, suggest that the compressor is trending toward failure. Based on this analysis, generate a detailed maintenance alert including a prioritized repair schedule and recommended corrective actions to mitigate downtime.")}>Predictive Maintenance...</Button>
                 <Button variant={"outline"} onClick={() => setUserMessage("Analyze the internal incident reports for the upstream oil and gas facility (Asset: Well Site A-17) to detect compliance gaps. Using real‑time incident data (including near misses, safety violations, and environmental events) along with historical incident outcomes, correlate these findings with the updated BSEE Incident Reporting & HSE Compliance Guidelines 2024. Identify missing data fields or delayed reporting that do not meet the new regulatory requirements and generate a prioritized set of corrective recommendations to enhance incident reporting and overall safety compliance. Your output should include detailed observations on which aspects of the incident logs (e.g., incomplete descriptions, inconsistent outcome classifications) need improvement.​")}>Safety...</Button>
-                <Button variant={"outline"} onClick={() => setUserMessage("What is  Optimization of compressor energy consumption based on Emerson’s Predictive Maintenance Guide for Gas Compressor?")}>TEST...</Button>
+                <Button variant="outline" onClick={() => setUserMessage("Analyze the financial transaction data for our customer base, focusing on identifying customers with frequent overdrafts, recurring cash flow gaps, and rapid declines in account balances. Use this analysis, combined with customer profile details (such as account balance, current loan amount, and credit score), and cross‑reference these findings with the risk thresholds from the Experian Credit Risk Scorecard PDF. Your task is to dynamically generate personalized upsell recommendations for each customer. The recommendations should include suggestions such as higher credit lines or tailored personal loans, with actionable insights based on each customer’s behavior.")}>Loan upsell...</Button>
               </div>
               </CardHeader>
               <CardContent className="flex-1 h-96">

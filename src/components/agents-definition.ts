@@ -1,5 +1,6 @@
 export interface Agent { input_key: string; type: string; name: string; system_message: string; description: string; icon: string; index_name: string; }
 
+// Default MagenticOne Agents
 export const agentsTeam1: Agent[] = [
     {
       input_key: "0001",
@@ -39,6 +40,7 @@ export const agentsTeam1: Agent[] = [
     }
   ];
 
+// Predictive Maintenance Scenario
 export const agentsTeam2: Agent[] = [
       {
         input_key: "0001",
@@ -211,6 +213,7 @@ export const agentsTeam2: Agent[] = [
         }
     ];
   
+// Safety Scenario
 export const agentsTeam3: Agent[] = [
     {
       input_key: "0001",
@@ -463,7 +466,7 @@ Reply "TERMINATE" in the end when everything is done.
         index_name:""
         },
   ];
-
+// Market analysis scenario
 export const agentsTeam4: Agent[] = [
     {
       input_key: "0001",
@@ -511,6 +514,312 @@ export const agentsTeam4: Agent[] = [
       index_name:"ag-demo-market"
       }
   ];
+
+// FSI - Upsell scenario
+export const agentsTeamFSI1: Agent[] = [
+  {
+    input_key: "0001",
+    type: "MagenticOne",
+    name: "Coder",
+    system_message: "",
+    description: "",
+    icon: "👨‍💻",
+    index_name: ""
+  },
+  {
+    input_key: "0002",
+    type: "MagenticOne",
+    name: "Executor",
+    system_message: "",
+    description: "",
+    icon: "💻",
+    index_name: ""
+  },
+  {
+    input_key: "0003",
+    type: "MagenticOne",
+    name: "FileSurfer",
+    system_message: "",
+    description: "",
+    icon: "📂",
+    index_name: ""
+  },
+  {
+    input_key: "0004",
+    type: "MagenticOne",
+    name: "WebSurfer",
+    system_message: "",
+    description: "",
+    icon: "🏄‍♂️",
+    index_name: ""
+  },
+  {
+    input_key:"0005",
+    type:"Custom",
+    name:"TransactionTrendAnalyzer",
+    system_message:`
+You are Transaction Trend Analyzer. Your task is to analyze the customer transaction data to identify patterns such as frequent overdrafts and rapid account balance declines. Detect anomalies like customers experiencing more than three overdrafts per month or a balance drop of 15% within 30 days. Your output should flag these customers and summarize the key transaction trends that indicate liquidity issues. 
+
+Datasets
+
+You are provided with detailed datasets. Your task is to analyze these datasets.
+
+### Dataset 1: Customer profiles
+
+| CustomerID | Name               | Age | AccountBalance | OverdraftCount | CurrentLoanAmount | CreditScore | LastLoanDate |  
+|------------|--------------------|-----|----------------|-----------------|-------------------|-------------|---------------|  
+| C001       | John Doe           | 45  | 3950           | 1               | 5000              | 720         | 2023-11-15    |  
+| C002       | Jane Smith         | 38  | 605            | 3               | 0                 | 680         | 2024-01-10    |  
+| C003       | Robert Brown       | 50  | 935            | 2               | 15000             | 750         | 2023-12-05    |  
+| C004       | Emily Davis        | 29  | 275            | 4               | 0                 | 640         | 2024-02-20    |  
+| C005       | Michael Wilson     | 41  | 2595           | 1               | 8000              | 710         | 2023-10-30    |  
+| C006       | Linda Johnson      | 55  | 270            | 3               | 12000             | 730         | 2023-12-25    |  
+| C007       | William Lee        | 47  | 3570           | 0               | 20000             | 780         | 2023-09-15    |  
+| C008       | Susan Clark        | 33  | 2050           | 2               | 0                 | 660         | 2024-01-05    |  
+| C009       | Daniel Lewis       | 39  | 4500           | 1               | 10000             | 700         | 2023-11-20    |  
+| C010       | Patricia Walker    | 52  | 3200           | 2               | 5000              | 710         | 2023-12-10    |  
+| C011       | Christopher Hall   | 40  | 4800           | 0               | 0                 | 740         | 2024-02-01    |  
+| C012       | Amanda Young       | 36  | 1500           | 3               | 0                 | 650         | 2024-01-15    |  
+| C013       | Matthew King       | 44  | 5300           | 1               | 15000             | 760         | 2023-11-05    |  
+| C014       | Jessica Wright     | 31  | 2800           | 2               | 3000              | 690         | 2024-02-12    |  
+| C015       | Joshua Scott       | 48  | 6000           | 0               | 0                 | 770         | 2023-10-20    |  
+| C016       | Olivia Green       | 42  | 2100           | 4               | 0                 | 660         | 2024-01-25    |  
+| C017       | Andrew Baker       | 37  | 4700           | 1               | 10000             | 720         | 2023-12-22    |  
+| C018       | Michelle Adams     | 50  | 3100           | 3               | 5000              | 700         | 2024-02-05    |  
+| C019       | Brandon Nelson     | 46  | 5400           | 2               | 20000             | 740         | 2023-11-30    |  
+| C020       | Ashley Carter      | 35  | 2300           | 5               | 0                 | 630         | 2024-01-08    |  
+| C021       | Justin Mitchell     | 41  | 4900           | 1               | 15000             | 750         | 2023-10-28    |  
+| C022       | Stephanie Perez    | 29  | 1800           | 3               | 0                 | 640         | 2024-02-14    |  
+| C023       | Brian Roberts      | 53  | 6200           | 0               | 25000             | 780         | 2023-12-18    |  
+| C024       | Sarah Turner       | 34  | 2600           | 2               | 0                 | 680         | 2024-01-20    |  
+| C025       | Kevin Phillips     | 47  | 4500           | 1               | 10000             | 710         | 2023-11-12    |  
+| C026       | Laura Campbell     | 38  | 2900           | 2               | 0                 | 660         | 2024-02-08    |  
+| C027       | Steven Parker      | 42  | 5000           | 0               | 15000             | 740         | 2023-12-02    |  
+| C028       | Kimberly Evans     | 45  | 3200           | 4               | 0                 | 650         | 2024-01-18    |  
+| C029       | Timothy Edwards    | 50  | 5400           | 1               | 20000             | 770         | 2023-10-10    |  
+| C030       | Rebecca Collins    | 39  | 3100           | 3               | 0                 | 680         | 2024-02-16    |  
+| C031       | Jason Stewart      | 41  | 4600           | 0               | 10000             | 720         | 2023-11-07    |  
+| C032       | Angela Sanchez     | 33  | 2700           | 2               | 0                 | 660         | 2024-01-30    |  
+| C033       | Eric Morris        | 48  | 5500           | 1               | 15000             | 750         | 2023-12-27    |  
+| C034       | Michelle Rogers    | 36  | 3000           | 3               | 0                 | 640         | 2024-02-03    |  
+| C035       | Patrick Reed       | 44  | 4800           | 0               | 10000             | 710         | 2023-10-15    |  
+| C036       | Laura Cook         | 38  | 3200           | 2               | 0                 | 660         | 2024-01-12    |  
+| C037       | Mark Morgan        | 47  | 5300           | 1               | 15000             | 740         | 2023-12-08    |  
+| C038       | Rachel Bell        | 31  | 2500           | 3               | 0                 | 650         | 2024-02-10    |  
+| C039       | Scott Murphy       | 42  | 4700           | 0               | 10000             | 720         | 2023-11-22    |  
+| C040       | Kimberly Bailey    | 35  | 2800           | 2               | 0                 | 660         | 2024-01-02    |  
+| C041       | Gregory Rivera     | 49  | 5100           | 1               | 15000             | 750         | 2023-12-20    |  
+| C042       | Rebecca Cooper     | 37  | 3000           | 3               | 0                 | 680         | 2024-02-06    |  
+| C043       | Alexander Richardson| 46  | 5600           | 0               | 20000             | 770         | 2023-10-30    |  
+| C044       | Victoria Cox       | 34  | 2900           | 2               | 0                 | 660         | 2024-01-27    |  
+| C045       | Jordan Ward        | 41  | 4800           | 1               | 15000             | 740         | 2023-12-14    |  
+| C046       | Erin Howard        | 39  | 2700           | 3               | 0                 | 650         | 2024-02-11    |  
+| C047       | Samuel Flores      | 50  | 5400           | 0               | 20000             | 770         | 2023-11-18    |  
+| C048       | Olivia Ramirez     | 32  | 3000           | 2               | 0                 | 660         | 2024-01-22    |  
+| C049       | Douglas James      | 45  | 5100           | 1               | 15000             | 750         | 2023-12-09    |  
+| C050       | Stephanie Watson    | 38  | 2800           | 3               | 0                 | 680         | 2024-02-03    |  
+
+
+### Dataset 2: Transaction History
+| TransactionID | CustomerID | Date       | TransactionAmount | TransactionType | Balance | Notes                         |  
+|---------------|------------|------------|--------------------|------------------|---------|-------------------------------|  
+| TX0001        | C001      | 2024-04-01 | 2000               | Deposit          | 5000    | Regular payroll deposit       |  
+| TX0002        | C002      | 2024-04-01 | -150               | Withdrawal       | 1200    | ATM withdrawal                |  
+| TX0003        | C003      | 2024-04-01 | -50                | Withdrawal       | 450     | POS purchase                  |  
+| TX0004        | C001      | 2024-04-02 | -100               | Withdrawal       | 4900    | Utility payment               |  
+| TX0005        | C004      | 2024-04-02 | -300               | Overdraft        | -50     | Overdraft occurred            |  
+| TX0006        | C005      | 2024-04-02 | 1500               | Deposit          | 3000    | Salary deposit                |  
+| TX0007        | C002      | 2024-04-03 | -200               | Withdrawal       | 1000    | POS purchase                  |  
+| TX0008        | C003      | 2024-04-03 | 500                | Deposit          | 950     | Refund deposit                |  
+| TX0009        | C006      | 2024-04-03 | -400               | Overdraft        | -20     | Overdraft occurred            |  
+| TX0010        | C007      | 2024-04-03 | 1200               | Deposit          | 2500    | Freelance income              |  
+| TX0011        | C001      | 2024-04-04 | -250               | Withdrawal       | 4650    | Rent payment                  |  
+| TX0012        | C004      | 2024-04-04 | 800                | Deposit          | 750     | Bonus deposit                 |  
+| TX0013        | C005      | 2024-04-04 | -100               | Withdrawal       | 2900    | Online purchase               |  
+| TX0014        | C008      | 2024-04-04 | 1000               | Deposit          | 1800    | Salary deposit                |  
+| TX0015        | C002      | 2024-04-05 | -50                | Withdrawal       | 950     | Coffee shop purchase          |  
+| TX0016        | C003      | 2024-04-05 | -60                | Withdrawal       | 890     | Groceries                     |  
+| TX0017        | C006      | 2024-04-05 | -150               | Overdraft        | -70     | Overdraft occurred            |  
+| TX0018        | C007      | 2024-04-05 | -100               | Withdrawal       | 2400    | Restaurant bill               |  
+| TX0019        | C001      | 2024-04-06 | -300               | Withdrawal       | 4350    | Car payment                   |  
+| TX0020        | C004      | 2024-04-06 | -100               | Withdrawal       | 650     | ATM withdrawal                |  
+| TX0021        | C008      | 2024-04-06 | -200               | Withdrawal       | 1600    | Bill payment                  |  
+| TX0022        | C002      | 2024-04-07 | -75                | Withdrawal       | 875     | Online shopping               |  
+| TX0023        | C005      | 2024-04-07 | -50                | Withdrawal       | 2850    | POS purchase                  |  
+| TX0024        | C003      | 2024-04-07 | -100               | Withdrawal       | 790     | Utility bill                  |  
+| TX0025        | C006      | 2024-04-07 | 400                | Deposit          | 380     | Refund deposit                |  
+| TX0026        | C007      | 2024-04-07 | -150               | Withdrawal       | 2250    | Travel expense                |  
+| TX0027        | C001      | 2024-04-08 | -100               | Withdrawal       | 4250    | Credit card payment           |  
+| TX0028        | C004      | 2024-04-08 | -250               | Overdraft        | -25     | Overdraft occurred            |  
+| TX0029        | C008      | 2024-04-08 | 600                | Deposit          | 2200    | Salary bonus                  |  
+| TX0030        | C002      | 2024-04-09 | -120               | Withdrawal       | 755     | Shopping                      |  
+| TX0031        | C005      | 2024-04-09 | -80                | Withdrawal       | 2770    | Subscription fee              |  
+| TX0032        | C003      | 2024-04-09 | 300                | Deposit          | 1090    | Side business income          |  
+| TX0033        | C006      | 2024-04-09 | -200               | Overdraft        | -90     | Overdraft occurred            |  
+| TX0034        | C007      | 2024-04-09 | -60                | Withdrawal       | 2190    | Cafe purchase                 |  
+| TX0035        | C001      | 2024-04-10 | -300               | Withdrawal       | 3950    | Rent payment                  |  
+| TX0036        | C004      | 2024-04-10 | 500                | Deposit          | 475     | Bonus deposit                 |  
+| TX0037        | C008      | 2024-04-10 | -100               | Withdrawal       | 2100    | Utility payment               |  
+| TX0038        | C002      | 2024-04-10 | -50                | Withdrawal       | 705     | Coffee purchase               |  
+| TX0039        | C005      | 2024-04-10 | -100               | Withdrawal       | 2670    | Online shopping               |  
+| TX0040        | C003      | 2024-04-11 | -75                | Withdrawal       | 1015    | Groceries                     |  
+| TX0041        | C006      | 2024-04-11 | -100               | Overdraft        | -30     | Overdraft occurred            |  
+| TX0042        | C007      | 2024-04-11 | 1500               | Deposit          | 3690    | Project income                |  
+| TX0043        | C001      | 2024-04-11 | -150               | Withdrawal       | 3800    | Car maintenance               |  
+| TX0044        | C004      | 2024-04-11 | -200               | Withdrawal       | 275     | POS purchase                  |  
+| TX0045        | C008      | 2024-04-11 | -50                | Withdrawal       | 2050    | Credit card payment           |  
+| TX0046        | C002      | 2024-04-12 | -100               | Withdrawal       | 605     | ATM withdrawal                |  
+| TX0047        | C005      | 2024-04-12 | -75                | Withdrawal       | 2595    | Utility bill                  |  
+| TX0048        | C003      | 2024-04-12 | -80                | Withdrawal       | 935     | Restaurant expense            |  
+| TX0049        | C006      | 2024-04-12 | 300                | Deposit          | 270     | Refund deposit                |  
+| TX0050        | C007      | 2024-04-12 | -120               | Withdrawal       | 3570    | Travel expense                |  
+
+
+Reply "TERMINATE" in the end when everything is done.
+`,
+    description:"An Transaction Trend Analyzer agent, who identifies patterns such as frequent overdrafts and rapid account balance declines. This agent has all data available.",
+    icon:"🎻",
+    index_name:""
+    },
+  {
+    input_key:"0006",
+    type:"RAG",
+    name:"KBAgent",
+    system_message:"",
+    description:"An agent that has access to internal index and can handle RAG tasks, call this agent if you are getting questions on Experian Credit Risk Scorecard with risk tresholds, etc..",
+    icon:"📖",
+    index_name:"ag-demo-fsi-upsell"
+    },
+    {
+      input_key:"0007",
+      type:"Custom",
+      name:"CreditOpportunityRecommender",
+      system_message:`
+You are Credit Opportunity Recommender. Your role is to integrate the flagged transaction trends with customer profile data – use data analysis done by Transaction Trend Analyzer agent and by using risk thresholds from the Experian Credit Risk Scorecard PDF. Generate personalized loan upsell recommendations by identifying customers who would benefit from additional credit. Your recommendations should include tailored product suggestions (such as higher credit lines or flexible personal loans) based on each customer’s financial behavior and overall credit profile..
+
+Datasets
+
+You are provided with detailed datasets. Your task is to analyze these datasets.
+
+### Dataset 1: Customer profiles
+
+| CustomerID | Name               | Age | AccountBalance | OverdraftCount | CurrentLoanAmount | CreditScore | LastLoanDate |  
+|------------|--------------------|-----|----------------|-----------------|-------------------|-------------|---------------|  
+| C001       | John Doe           | 45  | 3950           | 1               | 5000              | 720         | 2023-11-15    |  
+| C002       | Jane Smith         | 38  | 605            | 3               | 0                 | 680         | 2024-01-10    |  
+| C003       | Robert Brown       | 50  | 935            | 2               | 15000             | 750         | 2023-12-05    |  
+| C004       | Emily Davis        | 29  | 275            | 4               | 0                 | 640         | 2024-02-20    |  
+| C005       | Michael Wilson     | 41  | 2595           | 1               | 8000              | 710         | 2023-10-30    |  
+| C006       | Linda Johnson      | 55  | 270            | 3               | 12000             | 730         | 2023-12-25    |  
+| C007       | William Lee        | 47  | 3570           | 0               | 20000             | 780         | 2023-09-15    |  
+| C008       | Susan Clark        | 33  | 2050           | 2               | 0                 | 660         | 2024-01-05    |  
+| C009       | Daniel Lewis       | 39  | 4500           | 1               | 10000             | 700         | 2023-11-20    |  
+| C010       | Patricia Walker    | 52  | 3200           | 2               | 5000              | 710         | 2023-12-10    |  
+| C011       | Christopher Hall   | 40  | 4800           | 0               | 0                 | 740         | 2024-02-01    |  
+| C012       | Amanda Young       | 36  | 1500           | 3               | 0                 | 650         | 2024-01-15    |  
+| C013       | Matthew King       | 44  | 5300           | 1               | 15000             | 760         | 2023-11-05    |  
+| C014       | Jessica Wright     | 31  | 2800           | 2               | 3000              | 690         | 2024-02-12    |  
+| C015       | Joshua Scott       | 48  | 6000           | 0               | 0                 | 770         | 2023-10-20    |  
+| C016       | Olivia Green       | 42  | 2100           | 4               | 0                 | 660         | 2024-01-25    |  
+| C017       | Andrew Baker       | 37  | 4700           | 1               | 10000             | 720         | 2023-12-22    |  
+| C018       | Michelle Adams     | 50  | 3100           | 3               | 5000              | 700         | 2024-02-05    |  
+| C019       | Brandon Nelson     | 46  | 5400           | 2               | 20000             | 740         | 2023-11-30    |  
+| C020       | Ashley Carter      | 35  | 2300           | 5               | 0                 | 630         | 2024-01-08    |  
+| C021       | Justin Mitchell     | 41  | 4900           | 1               | 15000             | 750         | 2023-10-28    |  
+| C022       | Stephanie Perez    | 29  | 1800           | 3               | 0                 | 640         | 2024-02-14    |  
+| C023       | Brian Roberts      | 53  | 6200           | 0               | 25000             | 780         | 2023-12-18    |  
+| C024       | Sarah Turner       | 34  | 2600           | 2               | 0                 | 680         | 2024-01-20    |  
+| C025       | Kevin Phillips     | 47  | 4500           | 1               | 10000             | 710         | 2023-11-12    |  
+| C026       | Laura Campbell     | 38  | 2900           | 2               | 0                 | 660         | 2024-02-08    |  
+| C027       | Steven Parker      | 42  | 5000           | 0               | 15000             | 740         | 2023-12-02    |  
+| C028       | Kimberly Evans     | 45  | 3200           | 4               | 0                 | 650         | 2024-01-18    |  
+| C029       | Timothy Edwards    | 50  | 5400           | 1               | 20000             | 770         | 2023-10-10    |  
+| C030       | Rebecca Collins    | 39  | 3100           | 3               | 0                 | 680         | 2024-02-16    |  
+| C031       | Jason Stewart      | 41  | 4600           | 0               | 10000             | 720         | 2023-11-07    |  
+| C032       | Angela Sanchez     | 33  | 2700           | 2               | 0                 | 660         | 2024-01-30    |  
+| C033       | Eric Morris        | 48  | 5500           | 1               | 15000             | 750         | 2023-12-27    |  
+| C034       | Michelle Rogers    | 36  | 3000           | 3               | 0                 | 640         | 2024-02-03    |  
+| C035       | Patrick Reed       | 44  | 4800           | 0               | 10000             | 710         | 2023-10-15    |  
+| C036       | Laura Cook         | 38  | 3200           | 2               | 0                 | 660         | 2024-01-12    |  
+| C037       | Mark Morgan        | 47  | 5300           | 1               | 15000             | 740         | 2023-12-08    |  
+| C038       | Rachel Bell        | 31  | 2500           | 3               | 0                 | 650         | 2024-02-10    |  
+| C039       | Scott Murphy       | 42  | 4700           | 0               | 10000             | 720         | 2023-11-22    |  
+| C040       | Kimberly Bailey    | 35  | 2800           | 2               | 0                 | 660         | 2024-01-02    |  
+| C041       | Gregory Rivera     | 49  | 5100           | 1               | 15000             | 750         | 2023-12-20    |  
+| C042       | Rebecca Cooper     | 37  | 3000           | 3               | 0                 | 680         | 2024-02-06    |  
+| C043       | Alexander Richardson| 46  | 5600           | 0               | 20000             | 770         | 2023-10-30    |  
+| C044       | Victoria Cox       | 34  | 2900           | 2               | 0                 | 660         | 2024-01-27    |  
+| C045       | Jordan Ward        | 41  | 4800           | 1               | 15000             | 740         | 2023-12-14    |  
+| C046       | Erin Howard        | 39  | 2700           | 3               | 0                 | 650         | 2024-02-11    |  
+| C047       | Samuel Flores      | 50  | 5400           | 0               | 20000             | 770         | 2023-11-18    |  
+| C048       | Olivia Ramirez     | 32  | 3000           | 2               | 0                 | 660         | 2024-01-22    |  
+| C049       | Douglas James      | 45  | 5100           | 1               | 15000             | 750         | 2023-12-09    |  
+| C050       | Stephanie Watson    | 38  | 2800           | 3               | 0                 | 680         | 2024-02-03    |  
+
+
+### Dataset 2: Transaction History
+| TransactionID | CustomerID | Date       | TransactionAmount | TransactionType | Balance | Notes                         |  
+|---------------|------------|------------|--------------------|------------------|---------|-------------------------------|  
+| TX0001        | C001      | 2024-04-01 | 2000               | Deposit          | 5000    | Regular payroll deposit       |  
+| TX0002        | C002      | 2024-04-01 | -150               | Withdrawal       | 1200    | ATM withdrawal                |  
+| TX0003        | C003      | 2024-04-01 | -50                | Withdrawal       | 450     | POS purchase                  |  
+| TX0004        | C001      | 2024-04-02 | -100               | Withdrawal       | 4900    | Utility payment               |  
+| TX0005        | C004      | 2024-04-02 | -300               | Overdraft        | -50     | Overdraft occurred            |  
+| TX0006        | C005      | 2024-04-02 | 1500               | Deposit          | 3000    | Salary deposit                |  
+| TX0007        | C002      | 2024-04-03 | -200               | Withdrawal       | 1000    | POS purchase                  |  
+| TX0008        | C003      | 2024-04-03 | 500                | Deposit          | 950     | Refund deposit                |  
+| TX0009        | C006      | 2024-04-03 | -400               | Overdraft        | -20     | Overdraft occurred            |  
+| TX0010        | C007      | 2024-04-03 | 1200               | Deposit          | 2500    | Freelance income              |  
+| TX0011        | C001      | 2024-04-04 | -250               | Withdrawal       | 4650    | Rent payment                  |  
+| TX0012        | C004      | 2024-04-04 | 800                | Deposit          | 750     | Bonus deposit                 |  
+| TX0013        | C005      | 2024-04-04 | -100               | Withdrawal       | 2900    | Online purchase               |  
+| TX0014        | C008      | 2024-04-04 | 1000               | Deposit          | 1800    | Salary deposit                |  
+| TX0015        | C002      | 2024-04-05 | -50                | Withdrawal       | 950     | Coffee shop purchase          |  
+| TX0016        | C003      | 2024-04-05 | -60                | Withdrawal       | 890     | Groceries                     |  
+| TX0017        | C006      | 2024-04-05 | -150               | Overdraft        | -70     | Overdraft occurred            |  
+| TX0018        | C007      | 2024-04-05 | -100               | Withdrawal       | 2400    | Restaurant bill               |  
+| TX0019        | C001      | 2024-04-06 | -300               | Withdrawal       | 4350    | Car payment                   |  
+| TX0020        | C004      | 2024-04-06 | -100               | Withdrawal       | 650     | ATM withdrawal                |  
+| TX0021        | C008      | 2024-04-06 | -200               | Withdrawal       | 1600    | Bill payment                  |  
+| TX0022        | C002      | 2024-04-07 | -75                | Withdrawal       | 875     | Online shopping               |  
+| TX0023        | C005      | 2024-04-07 | -50                | Withdrawal       | 2850    | POS purchase                  |  
+| TX0024        | C003      | 2024-04-07 | -100               | Withdrawal       | 790     | Utility bill                  |  
+| TX0025        | C006      | 2024-04-07 | 400                | Deposit          | 380     | Refund deposit                |  
+| TX0026        | C007      | 2024-04-07 | -150               | Withdrawal       | 2250    | Travel expense                |  
+| TX0027        | C001      | 2024-04-08 | -100               | Withdrawal       | 4250    | Credit card payment           |  
+| TX0028        | C004      | 2024-04-08 | -250               | Overdraft        | -25     | Overdraft occurred            |  
+| TX0029        | C008      | 2024-04-08 | 600                | Deposit          | 2200    | Salary bonus                  |  
+| TX0030        | C002      | 2024-04-09 | -120               | Withdrawal       | 755     | Shopping                      |  
+| TX0031        | C005      | 2024-04-09 | -80                | Withdrawal       | 2770    | Subscription fee              |  
+| TX0032        | C003      | 2024-04-09 | 300                | Deposit          | 1090    | Side business income          |  
+| TX0033        | C006      | 2024-04-09 | -200               | Overdraft        | -90     | Overdraft occurred            |  
+| TX0034        | C007      | 2024-04-09 | -60                | Withdrawal       | 2190    | Cafe purchase                 |  
+| TX0035        | C001      | 2024-04-10 | -300               | Withdrawal       | 3950    | Rent payment                  |  
+| TX0036        | C004      | 2024-04-10 | 500                | Deposit          | 475     | Bonus deposit                 |  
+| TX0037        | C008      | 2024-04-10 | -100               | Withdrawal       | 2100    | Utility payment               |  
+| TX0038        | C002      | 2024-04-10 | -50                | Withdrawal       | 705     | Coffee purchase               |  
+| TX0039        | C005      | 2024-04-10 | -100               | Withdrawal       | 2670    | Online shopping               |  
+| TX0040        | C003      | 2024-04-11 | -75                | Withdrawal       | 1015    | Groceries                     |  
+| TX0041        | C006      | 2024-04-11 | -100               | Overdraft        | -30     | Overdraft occurred            |  
+| TX0042        | C007      | 2024-04-11 | 1500               | Deposit          | 3690    | Project income                |  
+| TX0043        | C001      | 2024-04-11 | -150               | Withdrawal       | 3800    | Car maintenance               |  
+| TX0044        | C004      | 2024-04-11 | -200               | Withdrawal       | 275     | POS purchase                  |  
+| TX0045        | C008      | 2024-04-11 | -50                | Withdrawal       | 2050    | Credit card payment           |  
+| TX0046        | C002      | 2024-04-12 | -100               | Withdrawal       | 605     | ATM withdrawal                |  
+| TX0047        | C005      | 2024-04-12 | -75                | Withdrawal       | 2595    | Utility bill                  |  
+| TX0048        | C003      | 2024-04-12 | -80                | Withdrawal       | 935     | Restaurant expense            |  
+| TX0049        | C006      | 2024-04-12 | 300                | Deposit          | 270     | Refund deposit                |  
+| TX0050        | C007      | 2024-04-12 | -120               | Withdrawal       | 3570    | Travel expense                |  
+
+
+
+Reply "TERMINATE" in the end when everything is done.
+`,
+      description:"An agent integrate the flagged transaction trends with customer profile data from data analysis done by Transaction Trend Analyzer agent. ",
+      icon:"🎻",
+      index_name:""
+      },
+];
 
 //   const sampleMarkdown = `
 // # Sample Markdown Document
