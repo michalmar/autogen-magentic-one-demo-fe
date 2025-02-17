@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bot, LogOut, Download, Delete, Loader2, Eye } from "lucide-react"
+import { Download, Delete, Loader2, Eye } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import {
@@ -93,9 +93,9 @@ export default function PlaygroundHistory() {
     }
   }
 
-  const handleLogout = () => {
-    setIsAuthenticated(false)
-  }
+  // const handleLogout = () => {
+  //   setIsAuthenticated(false)
+  // }
 
   const handleDeleteSession = async (sessionId: string) => {
     try {

@@ -17,7 +17,7 @@ import {
 import { ThemeProvider } from "@/components/theme-provider"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Bot, Plus, LogOut, Download, Delete} from "lucide-react"
+import { Plus, Download, Delete} from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // import remarkBreaks from 'remark-breaks'
@@ -216,9 +216,9 @@ export default function Agents() {
     }
   }
 
-  const handleLogout = () => {
-    setIsAuthenticated(false)
-  }
+  // const handleLogout = () => {
+  //   setIsAuthenticated(false)
+  // }
 
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
