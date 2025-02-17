@@ -37,6 +37,9 @@ import lSearch from '@/assets/l-search.png';
 import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
+import lSensor from '@/assets/l-sensor.png';
+import lAnalyzer from '@/assets/l-analyzer.png';
+import lRag from '@/assets/l-rag.png';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -209,6 +212,20 @@ export default function App() {
         return lPen;
       case 'taskresult':
         return lAi;
+      case 'sensorsentinel':
+        return lSensor;
+      case 'compliancesentinel':
+        return lSensor;
+      case 'trendanalyzer':
+        return lAnalyzer;
+      case 'transactiontrendanalyzer':
+        return lAnalyzer;
+      case 'oilgasknowledge':
+        return lRag;
+      case 'KBAgent'.toLowerCase():
+          return lRag;
+      case 'MaintanceKBAgent'.toLowerCase():
+          return lRag;
       default:
         return 'https://example.com/default.png';
     }
