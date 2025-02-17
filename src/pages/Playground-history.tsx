@@ -33,16 +33,10 @@ import { LoginCard } from "@/components/login"
 
 import axios from 'axios'
 
-import h1 from '@/assets/h1.png';
-import lBrain from '@/assets/l-brain.png';
-import lPen from '@/assets/l-pen.png';
-import lSearch from '@/assets/l-search.png';
-import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
-import lSensor from '@/assets/l-sensor.png';
-import lAnalyzer from '@/assets/l-analyzer.png';
-import lRag from '@/assets/l-rag.png';
+
+import { getAvatarSrc, getAvatarFallback } from '@/components/agents-definition'
 // New imports for the dialog UI. Adjust the import path as needed.
 import {
   Dialog,
@@ -73,66 +67,6 @@ export default function PlaygroundHistory() {
     setSelectedSessionId(sessionId)
     setDialogOpen(true)
   }
-    // Helper functions to get avatar source and fallback
-    const getAvatarSrc = (user: string) => {
-      switch (user.toLowerCase()) {
-        case 'user':
-          return h1;
-        case 'magenticoneorchestrator':
-          return lBrain;
-        case 'coder':
-          return lPen;
-        case 'filesurfer':
-          return lSearch;
-        case 'websurfer':
-          return lSearch;
-        case 'ragagent':
-          return lSearch;
-        case 'executor':
-          return lPen;
-        case 'taskresult':
-          return lAi;
-
-      case 'sensorsentinel':
-        return lSensor;
-      case 'compliancesentinel':
-        return lSensor;
-      case 'trendanalyzer':
-        return lAnalyzer;
-      case 'transactiontrendanalyzer':
-        return lAnalyzer;
-      case 'oilgasknowledge':
-        return lRag;
-      case 'KBAgent'.toLowerCase():
-          return lRag;
-      case 'MaintanceKBAgent'.toLowerCase():
-          return lRag;
-        default:
-          return 'https://example.com/default.png';
-      }
-    };
-    const getAvatarFallback = (user: string) => {
-      switch (user.toLowerCase()) {
-        case 'user':
-          return 'U';
-        case 'magenticoneorchestrator':
-          return 'O';
-        case 'coder':
-          return 'C';
-        case 'filesurfer':
-          return 'F';
-        case 'websurfer':
-          return 'W';
-        case 'ragagent':
-          return 'R';
-        case 'executor':
-          return 'E';
-        case 'ai':
-          return 'AI';
-        default:
-          return 'D';
-      }
-    };
   
 
   useEffect(() => {
@@ -181,9 +115,12 @@ export default function PlaygroundHistory() {
         <SidebarProvider defaultOpen={true}>
           <AppSidebar />
           <SidebarInset>
-            <header className="flex sticky top-0 bg-background h-12 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
+            <header className="flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
               <div className="flex items-center gap-2 px-4 w-full">
-                <Bot className="h-8 w-8" />
+                {/* <img src={banner} alt="Banner" className="h-64" /> */}
+                {/* <SidebarTrigger />   */}
+                {/* <Bot className="h-8 w-8" /> */}
+                <img src={ag  } alt="Banner" className="h-8" />
                 <Separator orientation="vertical" className="mr-2 h-4" />
                 <Breadcrumb>
                   <BreadcrumbList>
@@ -199,13 +136,17 @@ export default function PlaygroundHistory() {
                   </BreadcrumbList>
                 </Breadcrumb>
                 <div className="ml-auto hidden items-center gap-2 md:flex">
+          
+        
+                  {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
                   <ModeToggle />
-                  <Separator orientation="vertical" className="mr-2 h-4" />
-                  {isAuthenticated ? (
+                  {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
+                  {/* {isAuthenticated ? (
                     <Button variant="outline" onClick={handleLogout}>
                       <LogOut />Log out
                     </Button>
-                  ) : null}
+                  ) : null} */}
+                    
                 </div>
               </div>
             </header>

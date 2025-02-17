@@ -29,13 +29,15 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { LoginCard } from "@/components/login";
 
 
-import h1 from '@/assets/h1.png';
-import lBrain from '@/assets/l-brain.png';
-import lPen from '@/assets/l-pen.png';
-import lSearch from '@/assets/l-search.png';
-import lAi from '@/assets/l-ai.png';
+// import h1 from '@/assets/h1.png';
+// import lBrain from '@/assets/l-brain.png';
+// import lPen from '@/assets/l-pen.png';
+// import lSearch from '@/assets/l-search.png';
+// import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
 import aAif from '@/assets/azure-aif.png';
+
+import { getAvatarSrc } from '@/components/agents-definition'
 
 
 // TODO: FUJ! How to get ENV vars from SWA?
@@ -178,29 +180,29 @@ export default function Agents() {
     setAgents(agents.filter((agent) => agent.input_key !== inputKey));
   };
   
-  // Helper functions to get avatar source and fallback
-  const getAvatarSrc = (user: string) => {
-    switch (user.toLowerCase()) {
-      case 'user':
-        return h1;
-      case 'magenticoneorchestrator':
-        return lBrain;
-      case 'coder':
-        return lPen;
-      case 'filesurfer':
-        return lSearch;
-      case 'websurfer':
-        return lSearch;
-      case 'ragagent':
-        return lSearch;
-      case 'executor':
-        return lPen;
-      case 'taskresult':
-        return lAi;
-      default:
-        return 'https://example.com/default.png';
-    }
-  };
+  // // Helper functions to get avatar source and fallback
+  // const getAvatarSrc = (user: string) => {
+  //   switch (user.toLowerCase()) {
+  //     case 'user':
+  //       return h1;
+  //     case 'magenticoneorchestrator':
+  //       return lBrain;
+  //     case 'coder':
+  //       return lPen;
+  //     case 'filesurfer':
+  //       return lSearch;
+  //     case 'websurfer':
+  //       return lSearch;
+  //     case 'ragagent':
+  //       return lSearch;
+  //     case 'executor':
+  //       return lPen;
+  //     case 'taskresult':
+  //       return lAi;
+  //     default:
+  //       return 'https://example.com/default.png';
+  //   }
+  // };
 
 
 
@@ -226,10 +228,12 @@ export default function Agents() {
     <SidebarProvider defaultOpen={true}>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex sticky top-0 bg-background h-12 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
+        <header className="flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
           <div className="flex items-center gap-2 px-4 w-full">
+            {/* <img src={banner} alt="Banner" className="h-64" /> */}
             {/* <SidebarTrigger />   */}
-            <Bot className="h-8 w-8" />
+            {/* <Bot className="h-8 w-8" /> */}
+            <img src={ag  } alt="Banner" className="h-8" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
@@ -245,16 +249,16 @@ export default function Agents() {
               </BreadcrumbList>
             </Breadcrumb>
             <div className="ml-auto hidden items-center gap-2 md:flex">
-            {/* if session is running display loader */}
-            {/* if the session end display elapsed time */}
-            
+        
+   
+            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
             <ModeToggle />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            {isAuthenticated ? (
+            {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
+            {/* {isAuthenticated ? (
               <Button variant="outline" onClick={handleLogout}>
                 <LogOut />Log out
               </Button>
-            ) : null}
+            ) : null} */}
                 
             </div>
           </div>

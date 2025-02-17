@@ -28,8 +28,8 @@ export function AgentsSetup({ agents, removeAgent, addAgent, addRAGAgent, getAva
   // const [isCollapsed, setCollapsed] = useState(isCollapsed);
 
   return (
-    console.log('isCollapsed', isCollapsed),
-    console.log('collapsed', isCollapsed),
+    // console.log('isCollapsed', isCollapsed),
+    // console.log('collapsed', isCollapsed),
     <div className="space-y-4">
       {/* Toggle button */}
       {/* <div className="flex justify-end">
