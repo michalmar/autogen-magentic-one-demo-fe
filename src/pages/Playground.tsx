@@ -31,13 +31,15 @@ import { LoginCard } from "@/components/login";
 import axios from 'axios';
 
 import ag from '@/assets/ag.png';
-import aAif from '@/assets/azure-aif.png';
+// import aAif from '@/assets/azure-aif.png';
 
 import { getAvatarSrc, getAvatarFallback } from '@/components/agents-definition'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4, agentsTeamFSI1 } from '@/components/agents-definition';
+// import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4, agentsTeamFSI1 } from '@/components/agents-definition';
+import { agentsTeam1 } from '@/components/agents-definition';
+import { Footer } from "@/components/Footer";
 // TODO: FUJ! How to get ENV vars from SWA?
 // Define environment variables with default values
 const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be2.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
@@ -75,12 +77,12 @@ interface Agent {
   index_name: string;
 }
 
-interface Team {
-  teamId: string;
-  name: string;
-  agents: Agent[];
-  description?: string;
-}
+// interface Team {
+//   teamId: string;
+//   name: string;
+//   agents: Agent[];
+//   description?: string;
+// }
 export default function App() {
 
   const wellcomeMessage: ChatMessage = {
@@ -107,40 +109,13 @@ export default function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [agents, setAgents] = useState<Agent[]>(agentsTeam1);
 
-  // New states for teams and selected team
-  const [teams] = useState<Team[]>([
-    {
-      teamId: 'team-1',
-      name: 'MagenticOne Team',
-      agents: agentsTeam1,
-      description: 'Original MagenticOne Team. Includes Coder, Executor, FileSurfer and WebSurfer.'
-    },
-    {
-      teamId: 'team-2',
-      name: 'Team Predictive Maintenance',
-      agents: agentsTeam2,
-      description: 'Team focused on Predictive Maintenance tasks. Besides default agents includes RAG agent for Emerson Predictive Maintenance Guide and Sentinel Sentinel agent specialized in monitoring sensor streams and detecting trends or anomalies for particular device.'
-    },
-    {
-      teamId: 'team-3',
-      name: 'Team Safety & Incident Reporting',
-      agents: agentsTeam3,
-      description: 'Team focused on Safety & Incident Reporting tasks. Besides default agents includes RAG agent for BSEE Incident Reporting & HSE Compliance Guidelines 2024 and Compliance Sentinel agent, the watchdog for our incident reporting system at Well Site and Trend Analyzer agent, responsible for scrutinizing historical incident data to identify recurring patterns and underlying causes'
-    },
-    {
-      teamId: 'team-4',
-      name: 'Team Decision Support on Market Analysis',
-      agents: agentsTeam4,
-      description: 'Team helping with decision support on comprehensive, data-driven assessment of current market forecasts, commodity price trends, and OPEC announcements.'
-    },
-    {
-      teamId: 'team-5',
-      name: 'Team FSI - Loan Upsell',
-      agents: agentsTeamFSI1,
-      description: 'Team focused on Financial Services Industry tasks. Namely Loan upsell scenario by analyzing financial transaction data for our customer base, focusing on identifying customers with frequent overdrafts, recurring cash flow gaps, and rapid declines in account balances.'
-    },
-  ]);
-  const [selectedTeamId, setSelectedTeamId] = useState('team-1');
+  // Initialize agents from default team (will be updated by sidebar selection)
+  // Optionally use an effect to set initial team agents if needed
+
+  const handleTeamSelect = (team: { teamId: string; agents: Agent[] }) => {
+    // Update agents based on selected team from sidebar
+    setAgents(team.agents);
+  }
 
   const stopSession = async () => {
     try {
@@ -232,11 +207,9 @@ export default function App() {
     // Start timer
     const startTime = Date.now();
 
-    // Use team agents if found, otherwise fall back to global agents
-    const currentTeam = teams.find(team => team.teamId === selectedTeamId);
-    const selectedAgents = currentTeam ? currentTeam.agents : agents;
-    console.log('Selected team:', currentTeam);
-    console.log('Selected agents:', selectedAgents);
+    // Use updated agents state directly
+    const selectedAgents = agents;
+    console.log('Using agents:', selectedAgents);
 
     try {
       const response = await axios.post(`${BASE_URL}/start`, { 
@@ -287,15 +260,6 @@ export default function App() {
     setUserMessage('');
   };
 
-  // Handler for team selection change
-  const handleTeamValueChange = (value: string) => {
-    setSelectedTeamId(value);
-    const selectedTeam = teams.find(team => team.teamId === value);
-    if (selectedTeam) {
-      setAgents(selectedTeam.agents);
-    }
-  };
-  
   /// TODO: better login -> MS EntraID
   const handleLogin = (email: string, password: string) => {
     console.log('Logging in with:', email)
@@ -316,7 +280,7 @@ export default function App() {
       <LoginCard handleLogin={handleLogin} />
     ) : (
     <SidebarProvider defaultOpen={true}>
-      <AppSidebar />
+      <AppSidebar onTeamSelect={handleTeamSelect} />
       <SidebarInset>
         <header className="flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
           <div className="flex items-center gap-2 px-4 w-full">
@@ -354,24 +318,6 @@ export default function App() {
           </div>
         </header>
         {/* Main content */}
-        {/* New UI for team selection */}
-        {!(isTyping || (sessionTime) ? true : false) ? (
-        <div className="p-4">
-          <label htmlFor="teamSelect" className="mr-2 text-sm text-muted-foreground">Select Team:</label>
-          <Select value={selectedTeamId} onValueChange={(value) => handleTeamValueChange(value)}>
-            <SelectTrigger id="teamSelect" className="p-1 border rounded">
-              <SelectValue placeholder="Select a team" />
-            </SelectTrigger>
-            <SelectContent>
-              {teams.map((team) => (
-                <SelectItem key={team.teamId} value={team.teamId}>
-                  {team.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        ): null}
        
 
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -492,15 +438,7 @@ export default function App() {
           </div>
         </div>
         {/* Footer */}
-      <footer className="bg-muted mt-8">
-        <div className="container mx-auto px-4 py-2 text-center text-sm text-muted-foreground">
-          <p className='inline'>&copy; 2025 MagenticOne showcase powered by </p>
-          <img src={ag} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;running on </p>
-          <img src={aAif} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;ver. 20250214.1</p>
-        </div>
-      </footer>
+        <Footer />
       </SidebarInset>
     </SidebarProvider>
     )}

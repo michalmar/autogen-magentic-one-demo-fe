@@ -35,7 +35,6 @@ import { LoginCard } from "@/components/login";
 // import lSearch from '@/assets/l-search.png';
 // import lAi from '@/assets/l-ai.png';
 import ag from '@/assets/ag.png';
-import aAif from '@/assets/azure-aif.png';
 
 import { getAvatarSrc } from '@/components/agents-definition'
 
@@ -53,6 +52,7 @@ const ACTIVATION_CODE = import.meta.env.VITE_ACTIVATON_CODE || "0000";
 
 
 import { agentsTeam1, agentsTeam2, agentsTeam3, agentsTeam4, agentsTeamFSI1} from '@/components/agents-definition';
+import { Footer } from '@/components/Footer'
 
 interface Agent {
   input_key: string;
@@ -220,13 +220,19 @@ export default function Agents() {
   //   setIsAuthenticated(false)
   // }
 
+  const handleTeamSelect = (team: { teamId: string; agents: Agent[] }) => {
+    // Update agents based on selected team from sidebar
+    // setAgents(team.agents);
+    console.log('Selected team:', team);
+  }
+
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
     {!isAuthenticated ? (
       <LoginCard handleLogin={handleLogin} />
     ) : (
     <SidebarProvider defaultOpen={true}>
-      <AppSidebar />
+      <AppSidebar onTeamSelect={handleTeamSelect}/>
       <SidebarInset>
         <header className="flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
           <div className="flex items-center gap-2 px-4 w-full">
@@ -329,15 +335,7 @@ export default function Agents() {
           </div> 
         </div>
         {/* Footer */}
-      <footer className="bg-muted mt-8">
-        <div className="container mx-auto px-4 py-2 text-center text-sm text-muted-foreground">
-          <p className='inline'>&copy; 2025 MagenticOne showcase powered by </p>
-          <img src={ag} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;running on </p>
-          <img src={aAif} alt="Logo" className='w-[18px] inline'/>
-          <p className='inline'>&nbsp;ver. 20250206.5</p>
-        </div>
-      </footer>
+      <Footer />
       </SidebarInset>
     </SidebarProvider>
     )}

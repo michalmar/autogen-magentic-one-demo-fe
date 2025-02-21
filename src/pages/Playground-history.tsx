@@ -34,9 +34,9 @@ import { LoginCard } from "@/components/login"
 import axios from 'axios'
 
 import ag from '@/assets/ag.png';
-import aAif from '@/assets/azure-aif.png';
+// import aAif from '@/assets/azure-aif.png';
 
-import { getAvatarSrc, getAvatarFallback } from '@/components/agents-definition'
+import { getAvatarSrc, getAvatarFallback, Agent } from '@/components/agents-definition'
 // New imports for the dialog UI. Adjust the import path as needed.
 import {
   Dialog,
@@ -47,6 +47,7 @@ import {
 } from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MarkdownRenderer } from '@/components/markdown-display';
+import { Footer } from '@/components/Footer'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "https://autogen-demo-be2.whiteground-dbb1b0b8.eastus.azurecontainerapps.io";
 const ALLWAYS_LOGGED_IN =
@@ -107,13 +108,19 @@ export default function PlaygroundHistory() {
     }
   };
 
+  const handleTeamSelect = (team: { teamId: string; agents: Agent[] }) => {
+    // Update agents based on selected team from sidebar
+    // setAgents(team.agents);
+    console.log('Selected team:', team);
+  }
+
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       {!isAuthenticated ? (
         <LoginCard handleLogin={handleLogin} />
       ) : (
         <SidebarProvider defaultOpen={true}>
-          <AppSidebar />
+          <AppSidebar onTeamSelect={handleTeamSelect}/>
           <SidebarInset>
             <header className="flex sticky top-0 bg-background h-14 shrink-0 items-center gap-2 border-b px-4 z-10 shadow">
               <div className="flex items-center gap-2 px-4 w-full">
@@ -218,15 +225,7 @@ export default function PlaygroundHistory() {
                 </Card>
               </div>
             </div>
-            <footer className="bg-muted mt-8">
-              <div className="container mx-auto px-4 py-2 text-center text-sm text-muted-foreground">
-                <p className='inline'>&copy; 2025 MagenticOne showcase powered by </p>
-                <img src={ag} alt="Logo" className='w-[18px] inline' />
-                <p className='inline'>&nbsp;running on </p>
-                <img src={aAif} alt="Logo" className='w-[18px] inline' />
-                <p className='inline'>&nbsp;ver. 20250206.5</p>
-              </div>
-            </footer>
+            <Footer />
 
                         {/* Dialog for displaying history details */}
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
